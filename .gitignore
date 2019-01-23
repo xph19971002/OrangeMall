@@ -112,5 +112,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
 .idea/
-.static/images/
+.static/
