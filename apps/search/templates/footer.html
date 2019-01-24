@@ -1,0 +1,20 @@
+{% load staticfiles %}
+{# 这里是footer栏 包括尾角 #}
+{% block page_css %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+{% endblock %}
+
+<div class="footer" align="center">
+        <hr/>
+		<div class="foot_link" >
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>
+		</div>
+		<p>CopyRight © 2019 武汉Orange商城信息技术有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    鄂ICP备*******8号</p>
+</div>
