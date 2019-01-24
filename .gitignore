@@ -116,3 +116,4 @@ dmypy.json
 .idea/
 static/images/
 requirements.txt
+apps/main/migrations/
