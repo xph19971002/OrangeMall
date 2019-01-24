@@ -10,4 +10,5 @@ urlpatterns = [
     url('detail/', include('detail.urls')),
     url('main/', include('main.urls')),
     url('search/', include('search.urls')),
+    url('car/',include('car.urls')),
 ]
