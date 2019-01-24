@@ -189,7 +189,7 @@ class Image(models.Model):
         return self.img_id
 
     class Meta:
-        db_table = 'shop_image'
+        db_table = 'image'
         verbose_name = '商品图片'
         verbose_name_plural = '商品图片管理'
 
