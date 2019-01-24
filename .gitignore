@@ -69,7 +69,8 @@ docs/_build/
 
 # PyBuilder
 target/
-
+.gitgnore
+.test_page.html
 # Jupyter Notebook
 .ipynb_checkpoints
 
@@ -112,7 +113,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
+.gitignore
 .idea/
 static/images/
 requirements.txt
@@ -120,3 +121,6 @@ apps/main/migrations/
 apps/search/migrations/
 apps/account/migrations/
 apps/detail/migrations/
+apps/search/templates/test_page.html
+
+apps/search/templates/test_page.html
