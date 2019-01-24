@@ -38,7 +38,7 @@
                 <div class="am-tabs-bd">
                     <div class="am-tab-panel am-active">
 
-                        <form method="post" action="{% url 'register' %}">
+                        <form method="post" action="{% url 'account:register' %}">
                             {%  csrf_token %}
                             <div class="user-email">
                                 <label for="email"><i class="am-icon-envelope-o"></i></label>
@@ -70,7 +70,7 @@
 
                     <div class="am-tab-panel">
 
-                        <form method="post" action="{% url 'register' %}">
+                        <form method="post" action="{% url 'account:register' %}">
                             {% csrf_token %}
                             <div class="user-phone">
                                 <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
