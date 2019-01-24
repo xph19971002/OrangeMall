@@ -7,8 +7,6 @@ from apps.main.models import Shop, Image, Property
 
 
 def search(request):
-    imgs = Image.objects.all()
-    pros = Property.objects.all()
     shops = Shop.objects.all().values('name', 'original_price','sale','shop_id')
     for shop in shops:
         img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
