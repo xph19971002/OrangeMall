@@ -127,7 +127,8 @@ TIME_ZONE = 'Asia/Shanghai'
 # 国际化配置,自动转化多个语言
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+# 不使使用django的时区,使用系统时区
+USE_TZ = False
 
 # 静态文件的访问路径
 STATIC_URL = '/static/'
