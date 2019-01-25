@@ -85,12 +85,13 @@ def sort(request):
         cate_3 =Category.objects.filter(parent_id=i['cate_id']).values('cate_id')
         for i in cate_3:
             shops = Shop.objects.filter(cate_id=i['cate_id']).values('name', 'original_price', 'sale', 'shop_id')
-            
 
+            i = 0
             for shop in shops:
+
                 img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
                 shop['img_url'] = img['img_url']
-
+                i += 1
             p = Paginator(shops, 12)  # 分页，10篇文章一页
             if p.num_pages <= 1:  # 如果文章不足一页
                 shop_list = shops  # 直接返回所有文章
