@@ -12,10 +12,10 @@
 
 							</div>
 							<ul class="select">
-								<p class="title font-normal">
-									<span class="fl">松子</span>
-									<span class="total fl">搜索到<strong class="num">997</strong>件相关商品</span>
-								</p>
+								<h3 class="title font-normal">
+									<span class="fl">{{ q }}</span>
+									<span class="total fl">搜索到<strong class="num">{{ shop_numbers }}</strong>件相关商品</span>
+								</h3>
 								<div class="clear"></div>
 								<li class="select-result">
 									<dl>
@@ -28,16 +28,12 @@
 								<li class="select-list">
 									<dl id="select1">
 										<dt class="am-badge am-round">品牌</dt>
-
 										 <div class="dd-conent">
 											<dd class="select-all selected"><a href="#">全部</a></dd>
-											<dd><a href="#">百草味</a></dd>
-											<dd><a href="#">良品铺子</a></dd>
-											<dd><a href="#">新农哥</a></dd>
-											<dd><a href="#">楼兰蜜语</a></dd>
-											<dd><a href="#">口水娃</a></dd>
-											<dd><a href="#">考拉兄弟</a></dd>
-										 </div>
+											{% for obj1 in cate_1 %}
+											    <dd><a href="#">{{ obj1.name }}</a></dd>
+                                            {% endfor %}
+                                         </div>
 
 									</dl>
 								</li>
@@ -46,10 +42,10 @@
 										<dt class="am-badge am-round">种类</dt>
 										<div class="dd-conent">
 											<dd class="select-all selected"><a href="#">全部</a></dd>
-											<dd><a href="#">东北松子</a></dd>
-											<dd><a href="#">巴西松子</a></dd>
-											<dd><a href="#">夏威夷果</a></dd>
-											<dd><a href="#">松子</a></dd>
+											{% for obj2 in cate_2 %}
+											    <dd><a href="#">{{ obj2.name }}</a></dd>
+                                            {% endfor %}
+
 										</div>
 									</dl>
 								</li>
@@ -58,10 +54,9 @@
 										<dt class="am-badge am-round">选购热点</dt>
 										<div class="dd-conent">
 											<dd class="select-all selected"><a href="#">全部</a></dd>
-											<dd><a href="#">手剥松子</a></dd>
-											<dd><a href="#">薄壳松子</a></dd>
-											<dd><a href="#">进口零食</a></dd>
-											<dd><a href="#">有机零食</a></dd>
+											{% for obj3 in cate_3 %}
+											    <dd><a href="#">{{ obj3.name }}</a></dd>
+                                            {% endfor %}
 										</div>
 									</dl>
 								</li>
@@ -79,7 +74,7 @@
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-                                    {% for shop in shops %}
+                                    {% for shop in shop_list %}
                                         <li>
                                             <div class="i-pic limit">
                                                 <img src="/static/img/big/{{ shop.img_url }}.jpg">
@@ -98,20 +93,20 @@
                             </div>
 							<div class="clear"></div>
 							<!--分页 -->
-							<ul class="am-pagination am-pagination-right">
-								<li class="am-disabled"><a href="#">«</a></li>
-								<li class="am-active"><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">»</a></li>
-							</ul>
+{#							<ul class="am-pagination am-pagination-right">#}
+{#								<li class="am-disabled"><a href="#">«</a></li>#}
+{#								<li class="am-active"><a href="#">1</a></li>#}
+{#								<li><a href="#">2</a></li>#}
+{#								<li><a href="#">3</a></li>#}
+{#								<li><a href="#">4</a></li>#}
+{#								<li><a href="#">5</a></li>#}
+{#								<li><a href="#">»</a></li>#}
+{#							</ul>#}
 
 						</div>
 					</div>
     {% if data %}
-            <ul id="pages" class="pagination pagination-sm pagination-xs">
+            <ul id="pages" class="am-pagination am-pagination-right">
                 {% if data.first %}
                     <li><a href="?page=1">1</a></li>
                 {% endif %}
