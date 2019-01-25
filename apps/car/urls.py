@@ -8,7 +8,7 @@ from apps.car import views
 
 
 urlpatterns = [
-    url('list/', views.car_list,name='car_list'),
+    url('list1/', views.car_list,name='car_list'),
     url('del/',views.del_shop,name='del'),
     url('confirm/',views.confirm,name='confirm')
 ]
