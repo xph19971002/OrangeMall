@@ -205,16 +205,16 @@ class Order(models.Model):
     oid = models.AutoField('订单ID', primary_key=True)
     # 订单号唯一
     order_code = models.CharField('订单号', max_length=255)
-    address = models.CharField('配送地址', max_length=255, null=False, unique=True)
+    address = models.CharField('配送地址', max_length=255,)
     postcode = models.CharField('邮编', max_length=100)
     receiver = models.CharField('收货人', max_length=100)
-    mobile = models.CharField('手机号', max_length=11, null=False, unique=True)
+    mobile = models.CharField('手机号', max_length=11,)
     user_message = models.CharField('附加信息', max_length=255)
     create_date = models.DateTimeField('创建日期', max_length=0)
     pay_date = models.DateTimeField('支付时间', max_length=0,
                                     blank=True, null=True)
-    delivery_date = models.DateTimeField('交易日期', blank=True, null=True)
-    confirm_date = models.DateTimeField('确认日期', blank=True, null=True)
+    delivery_date = models.DateTimeField('交易日期', blank=True)
+    confirm_date = models.DateTimeField('确认日期', blank=True)
     """ 1正常 0 异常, -1 删除 """
     status = models.IntegerField('订单状态', choices=ORDER_STATUS, default=1)
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name="用户ID", related_name='user_order')
