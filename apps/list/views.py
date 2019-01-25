@@ -9,13 +9,13 @@ from apps.main.models import Shop, Image, Category
 
 
 def list(request):
-    cate_1 = Category.objects.filter(level=1).values('name','cate_id')
+    cate_1 = Category.objects.filter(level=1).values('name', 'cate_id')
     # cate_1 = random.sample(list(cate_1),8)
     # cate_2 = Category.objects.filter(level=3).values('name')
     # cate_2 = random.sample(list(cate_2), 8)
     # cate_3 = Shop.objects.all().values('name')
     # cate_3 = random.sample(list(cate_3),5)
-    shops = Shop.objects.all().values('name', 'original_price','sale','shop_id')
+    shops = Shop.objects.all().values('name', 'original_price', 'sale', 'shop_id')
     shop_numbers = Shop.objects.all().count()
     for shop in shops:
         img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
@@ -24,7 +24,7 @@ def list(request):
     p = Paginator(shops, 12)  # 分页，10篇文章一页
     if p.num_pages <= 1:  # 如果文章不足一页
         shop_list = shops  # 直接返回所有文章
-        data= {}  # 不需要分页按钮
+        data = {}  # 不需要分页按钮
     else:
         page = int(request.GET.get('page', 1))  # 获取请求的文章页码，默认为第一页
         shop_list = p.page(page)  # 返回指定页码的页面
@@ -75,17 +75,16 @@ def list(request):
             'total_pages': total_pages,
             'page': page
         }
-    return render(request,'list.html',locals())
+    return render(request, 'list.html', locals())
 
 
 def sort(request):
     cate_id = request.GET.get('cate_id')
     cate_2 = Category.objects.filter(parent_id=cate_id).values('cate_id')
     for i in cate_2:
-        cate_3 =Category.objects.filter(parent_id=i['cate_id']).values('cate_id')
+        cate_3 = Category.objects.filter(parent_id=i['cate_id']).values('cate_id')
         for i in cate_3:
             shops = Shop.objects.filter(cate_id=i['cate_id']).values('name', 'original_price', 'sale', 'shop_id')
-            
 
             for shop in shops:
                 img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
@@ -146,9 +145,3 @@ def sort(request):
                     'page': page
                 }
             return render(request, 'sort.html', locals())
-
-
-
-
-
-

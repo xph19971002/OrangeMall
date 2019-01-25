@@ -8,5 +8,5 @@ __date__ = '2019/1/24 0024 20:33'
 
 urlpatterns = [
     url(r'sort/', views.sort, name='sort'),
-    url('^$',views.list,name='list'),
+    url('^$', views.list, name='list'),
 ]
