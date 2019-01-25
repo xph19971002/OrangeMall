@@ -3685,7 +3685,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.viewport.appendChild(this.element);
 	    this.container.appendChild(this.viewport);
 
-	    // if we don't have to wait for an img to load, show the message right away
+	    // if we don't have to wait for an image to load, show the message right away
 	    if (this.img) {
 	      this.doLog("Add to homescreen: not displaying callout because waiting for img to load");
 	    } else {
@@ -9931,7 +9931,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var src;
 	    var title;
 
-	    // get img URI from link's href attribute
+	    // get image URI from link's href attribute
 	    if (item.nodeName === 'A') {
 	      src = item.href; // to absolute path
 	      title = item.title || '';
@@ -9964,7 +9964,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	PureView.prototype.loadImage = function($slide, callback) {
-	  var appendedFlag = 'img-appended';
+	  var appendedFlag = 'image-appended';
 
 	  if (!$slide.data(appendedFlag)) {
 	    var $img = $('<img>', {
@@ -9976,7 +9976,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var $pinchWrapper = $slide.find(this.options.selector.pinchZoom);
 	    $pinchWrapper.data('amui.pinchzoom', new PinchZoom($pinchWrapper[0], {}));
-	    $slide.data('img-appended', true);
+	    $slide.data('image-appended', true);
 	  }
 
 	  callback && callback.call(this);
@@ -10024,7 +10024,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.transitioning = 0;
 	  }
 
-	  // TODO: pre-load next img
+	  // TODO: pre-load next image
 	};
 
 	PureView.prototype.nextSlide = function() {
