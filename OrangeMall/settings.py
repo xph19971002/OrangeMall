@@ -48,6 +48,7 @@ CUSTOM_APPS = [
     'apps.account',
     'apps.search',
     'apps.detail',
+    'apps.list',
 ]
 
 INSTALLED_APPS = SYS_APPS + EXT_APPS + CUSTOM_APPS
