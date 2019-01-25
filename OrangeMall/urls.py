@@ -12,4 +12,5 @@ urlpatterns = [
     url('search/', include('search.urls')),
     url('list/', include('apps.list.urls',namespace='list')),
     url('car/',include('car.urls')),
+    url('order/',include('order.urls'))
 ]

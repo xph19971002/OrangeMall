@@ -50,6 +50,7 @@ CUSTOM_APPS = [
     'apps.detail',
     'apps.list',
     'apps.car',
+    'apps.order'
 ]
 
 INSTALLED_APPS = SYS_APPS + EXT_APPS + CUSTOM_APPS
@@ -94,11 +95,12 @@ WSGI_APPLICATION = 'OrangeMall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'omdb',
+        'NAME': 'django_shopping',
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '192.168.50.50',
+        # 'HOST': '192.168.50.50',
+        'HOST':'127.0.0.1'
     }
 }
 
@@ -145,6 +147,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/search/static'),
     os.path.join(BASE_DIR, 'apps/account/static'),
     os.path.join(BASE_DIR, 'apps/car/static'),
+    os.path.join(BASE_DIR, 'apps/order/static'),
 )
 
 # 指定自定义用户模型所在的位置
