@@ -49,6 +49,7 @@ CUSTOM_APPS = [
     'apps.search',
     'apps.detail',
     'apps.list',
+    'apps.car',
 ]
 
 INSTALLED_APPS = SYS_APPS + EXT_APPS + CUSTOM_APPS
@@ -143,13 +144,14 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/detail/static'),
     os.path.join(BASE_DIR, 'apps/search/static'),
     os.path.join(BASE_DIR, 'apps/account/static'),
+    os.path.join(BASE_DIR, 'apps/car/static'),
 )
 
 # 指定自定义用户模型所在的位置
 AUTH_USER_MODEL = 'main.User'
 
 # 验证登录路径
-LOGIN_URL = '/account/login/'
+LOGIN_URL = '/account/login_view/'
 
 # ----------------------------------------------------------------------
 #                              文件上传配置

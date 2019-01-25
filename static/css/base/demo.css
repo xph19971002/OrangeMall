@@ -118,7 +118,7 @@ color: #F5F5F2;font-size: 14px;cursor:pointer;border-radius:0px 0px ;}
 .tip{ display:none}
 
 
-.navCir{position: fixed;bottom:0px ;width: 100%;z-index: 999;background:#fff ;}
+.navCir{position: fixed;bottom:0;width: 100%;z-index: 999;background:#fff ;}
 .navCir li{width: 25%;padding:5px ;background:#fff ;border-top:1px solid #f5f5f5 ;float: left;text-align: center;font-size: 14px;}
 .navCir li i{display: block;font-size: 18px;}
 .navCir li.active a{color:#F03726 ;}
