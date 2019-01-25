@@ -7,5 +7,5 @@ urlpatterns = [
     url('login/', views.login_view, name='login'),
     url('register', views.register, name='register'),
     url('update/', views.update),
-    url('logout/', views.logout, name='logout'),
+    url('logout/', views.logout_view, name='logout'),
 ]
