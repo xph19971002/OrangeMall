@@ -30,7 +30,7 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-
+.img
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -94,7 +94,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+.static\
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -120,3 +120,4 @@ apps/main/migrations/
 apps/search/migrations/
 apps/account/migrations/
 apps/detail/migrations/
+static/img/

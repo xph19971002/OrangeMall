@@ -14,9 +14,9 @@ def index(request):
     shop_car_queryset = ShopCar.objects.filter(shop_id=request.user.id)
     shop_car_num = shop_car_queryset.count() if shop_car_queryset.exists() else 0
     for cate in cate_list:
-        sub_menus = Category.objects.filter(parent_id=cate.cate_id,level=2)
+        sub_menus = Category.objects.filter(parent_id=cate.cate_id, level=2)
         for sub_menu in sub_menus:
-            sub_menus2 = Category.objects.filter(parent_id=sub_menu.cate_id,level=3)
+            sub_menus2 = Category.objects.filter(parent_id=sub_menu.cate_id, level=3)
             sub_menu.sub_menus2 = sub_menus2
         cate.sub_menus = sub_menus
 
@@ -29,11 +29,4 @@ def index(request):
             for shop in shops:
                 shop.image = shop.image_set.all().first()
             sub_cate.shops = shops
-    return render(request,'index.html',locals())
-
-
-
-
-
-
-
+    return render(request, 'index.html', locals())

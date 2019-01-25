@@ -4,9 +4,9 @@
             <div class="menu-hd">
                 {% if user.is_authenticated %}
                     <span>{{ user.username }}</span>
-                    <a href={% url 'account:logout'%}>登出</a>
+                    <a href={% url 'account:logout' %}>登出</a>
                 {% else %}
-                    <a href="{% url 'account:login_view' %}" target="_top" class="h">亲，请登录</a>
+                    <a href="{% url 'account:login' %}" target="_top" class="h">亲，请登录</a>
                     <a href="{% url 'account:register' %}" target="_top">免费注册</a>
                 {% endif %}
             </div>
@@ -17,7 +17,8 @@
             <div class="menu-hd"><a href="{% url 'index' %}" target="_top" class="h">商城首页</a></div>
         </div>
         <div class="topMessage my-shangcheng">
-            <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
+            <div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a>
+            </div>
         </div>
         <div class="topMessage mini-cart">
             <div class="menu-hd">

@@ -48,6 +48,7 @@ CUSTOM_APPS = [
     'apps.account',
     'apps.search',
     'apps.detail',
+    'apps.list',
     'apps.car',
 ]
 

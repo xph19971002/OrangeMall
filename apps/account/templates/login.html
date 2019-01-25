@@ -36,7 +36,7 @@
 
             <div class="login-form">
 
-                <form method="post" action="{% url 'account:login_view' %}">
+                <form method="post" action="{% url 'account:login' %}">
                     {% csrf_token %}
                     <div class="user-name">
                         <label for="user"><i class="am-icon-user"></i></label>
