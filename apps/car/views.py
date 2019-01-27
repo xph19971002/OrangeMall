@@ -54,7 +54,8 @@ def confirm(request):
                 # 开启事物
                 with transaction.atomic():
                     # 生成订单
-                    oid = product_order(request)
+                    # oid = product_order(request)
+                    oid = 1
                     for car in cars:
                         car_id = car.get('car_id')
                         num = car.get('num')
@@ -70,7 +71,7 @@ def product_order(request):
     # 第一步生成订单号  全站必须唯一   尽量大于8位
     user_id = request.user.id
     order_code = f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}{random.randint(100000,999999)}"
-    order = Order(order_code=order_code, user_id=user_id,shop_id=1708095)
+    order = Order(order_code=order_code, uid=user_id,shop_id=1749808)
     order.save()
     return order.oid
 

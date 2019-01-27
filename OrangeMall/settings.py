@@ -92,27 +92,27 @@ WSGI_APPLICATION = 'OrangeMall.wsgi.application'
 # ----------------------------------------------------------------------
 # 数据库配置
 # ----------------------------------------------------------------------
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'omdb',
-        'POST': '3306',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST': '192.168.50.50',
-    }
-}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'django_shopping',
+#         'NAME': 'omdb',
 #         'POST': '3306',
 #         'USER': 'root',
 #         'PASSWORD': 'root',
-#         'HOST': '127.0.0.1',
-#
+#         'HOST': '192.168.50.50',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_shopping',
+        'POST': '3306',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': '127.0.0.1',
+
+    }
+}
 # ----------------------------------------------------------------------
 #                           用户密码验证配置
 # ----------------------------------------------------------------------
