@@ -10,7 +10,7 @@ from django.shortcuts import render
 # Create your views here.
 from django_ajax.decorators import ajax
 
-from apps.main.models import ShopCar, Order
+from apps.main.models import ShopCar, Order, User
 
 
 @login_required
@@ -54,14 +54,15 @@ def confirm(request):
                 # 开启事物
                 with transaction.atomic():
                     # 生成订单
-                    # oid = product_order(request)
-                    oid = 1
+                    oid = product_order(request).oid
+                    # oid = 1
                     for car in cars:
                         car_id = car.get('car_id')
                         num = car.get('num')
                         ShopCar.objects.filter(car_id=car_id).update(number=num,order_id=oid)
                 return {'oid':oid}
-            except:
+            except Exception as e:
+                print(e)
                 transaction.rollback()
         else:
             pass
@@ -69,11 +70,15 @@ def confirm(request):
 # 生成订单信息
 def product_order(request):
     # 第一步生成订单号  全站必须唯一   尽量大于8位
-    user_id = request.user.id
+    # user_id = request.user.id
     order_code = f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}{random.randint(100000,999999)}"
-    order = Order(order_code=order_code, uid=user_id,shop_id=1749808)
-    order.save()
-    return order.oid
+    order = Order(order_code=order_code, user=request.user,address='武汉',mobile='111')
+    if order:
+        order.save()
+        return order
+    else:
+        print('错误')
+
 
 
 

@@ -52,7 +52,7 @@
                         let $sum = $(this).parent().nextAll('.col06').find('input');
                         let num = $sum.val();
                         let car_id = $sum.attr('id');
-                        let shop_id = $(this).parent().nextAll('.col06').find('.add_shop_id');
+                        let shop_id = $(this).parent().nextAll('.col06').find('add_shop_id');
                         cars.push({num: num, car_id: car_id, shop_id:shop_id})
                     }
                 });
