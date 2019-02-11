@@ -29,4 +29,16 @@ def index(request):
             for shop in shops:
                 shop.image = shop.image_set.all().first()
             sub_cate.shops = shops
+
+    ######头部购物车数量######
+    user = request.user
+    shop_num = 0
+    car_shops = ShopCar.objects.filter(user=user.id, status=1)
+    for car_shop in car_shops:
+        shop_num += car_shop.number
+    request.session['car_shop_num'] = shop_num
     return render(request, 'index.html', locals())
+
+
+
+

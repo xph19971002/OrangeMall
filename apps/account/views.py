@@ -59,7 +59,7 @@ def register(request):
                         # 如果注册成功，直接记住用户登录状态，跳转登录界面
                         login(request,user)
                         # 反向解析
-                        url=reverse('account:login_view')
+                        url=reverse('account:login')
                         return redirect(url)
                     else:
                         return render(request,'register.html',{'msg':'注册失败'})

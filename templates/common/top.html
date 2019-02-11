@@ -27,9 +27,9 @@
                     <span>购物车</span>
                     <strong id="J_MiniCartNum" class="h">
                         {% if user.is_authenticated %}
-                            <span>5</span>
+                            <span>({{ request.session.car_shop_num }})</span>
                         {% else %}
-                            0
+                            (0)
                         {% endif %}
                     </strong>
                 </a>
