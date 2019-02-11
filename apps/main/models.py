@@ -23,11 +23,11 @@ class Navigation(models.Model):
 class Headline(models.Model):
     hid = models.AutoField(verbose_name='ID', primary_key=True)
     info = models.CharField(verbose_name=u'信息', max_length=255)
-    status = models.BooleanField()
+    status = models.BooleanField(verbose_name=u'状态')
 
     class Meta:
         db_table = 'headline'
-        verbose_name = u'商城头条',
+        verbose_name = u'商城头条'
         verbose_name_plural = verbose_name
 
 
@@ -106,7 +106,7 @@ class Shop(models.Model):
     stock = models.IntegerField(verbose_name=u'库存')
     # 外键，与商品分类表Cate建立一对多关联
     cate = models.ForeignKey(Category, models.DO_NOTHING, db_column='cate_id', db_index=True, verbose_name=u'商品分类')
-    create_date = models.DateTimeField(verbose_name=u'创建时间', auto_now_add=True)
+    create_date = models.DateTimeField(verbose_name=u'创建时间', auto_now = True)
     # 是否热卖  0 非热卖  1热卖商品
     is_hot = models.BooleanField(verbose_name=u'热卖商品', default=False)
     # 销量
@@ -205,10 +205,10 @@ class Order(models.Model):
     oid = models.AutoField(u'订单ID', primary_key=True)
     # 订单号唯一
     order_code = models.CharField(u'订单号', max_length=255)
-    address = models.CharField(u'配送地址', max_length=255, )
+    address = models.CharField('配送地址', max_length=255,)
     postcode = models.CharField(u'邮编', max_length=100)
     receiver = models.CharField(u'收货人', max_length=100)
-    mobile = models.CharField(u'手机号', max_length=11, )
+    mobile = models.CharField(u'手机号', max_length=11,)
     user_message = models.CharField(u'附加信息', max_length=255)
     create_date = models.DateTimeField(u'创建日期', max_length=0)
     pay_date = models.DateTimeField(u'支付时间', max_length=0,
@@ -219,8 +219,8 @@ class Order(models.Model):
     status = models.IntegerField(u'订单状态', choices=ORDER_STATUS, default=1)
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name=u"用户ID",
                              related_name='user_order')
-    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', verbose_name=u"商品ID",
-                             related_name='shop_order')
+    # shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', verbose_name=u"商品ID",
+    #                          related_name='shop_order')
 
     def __str__(self):
         return self.order_code

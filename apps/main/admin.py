@@ -2,7 +2,7 @@
 import xadmin
 from xadmin import views
 
-from apps.main.models import Navigation, User
+from apps.main.models import Navigation, Headline, Banner, Shop
 
 
 class BaseStyleSettings:
@@ -16,6 +16,7 @@ class BaseStyleSettings:
 xadmin.site.register(views.BaseAdminView, BaseStyleSettings)
 
 
+# 修改页眉页脚
 class GlobalSettings:
     site_title = r'橘子商城'
     site_footer = r'橘子，爱你所爱'
@@ -24,6 +25,7 @@ class GlobalSettings:
 xadmin.site.register(views.CommAdminView, GlobalSettings)
 
 
+# 后台导航栏
 class NavigationXadmin:
     # pass
     # 默认情况下显示object对象
@@ -31,6 +33,42 @@ class NavigationXadmin:
 
 
 xadmin.site.register(Navigation, NavigationXadmin)
+
+
+# 后台新闻头条
+class HeadlineXadmin:
+    list_display = ['hid', 'info', 'status']
+
+
+xadmin.site.register(Headline, HeadlineXadmin)
+
+
+# 后台轮播图
+class BannerXadmin:
+    list_display = ['banner_id', 'title', 'detail_url', 'order', 'create_time', 'is_delete']
+
+
+xadmin.site.register(Banner, BannerXadmin)
+
+
+# 后台商品管理
+class ShopXadmin:
+    list_display = ['shop_id',
+                    'name',
+                    'original_price',
+                    'promote_price',
+                    'stock',
+                    'cate',
+                    'sale',
+                    'sort',
+                    'is_hot',
+                    'create_date',
+                    'is_delete'
+                    ]
+    list_per_page = 10
+
+
+xadmin.site.register(Shop, ShopXadmin)
 
 #
 # class UserXadmin:
