@@ -10,24 +10,24 @@ from django.db import models
 # 导航栏
 class Navigation(models.Model):
     nav_id = models.AutoField(verbose_name='ID', primary_key=True)
-    nav_name = models.CharField(verbose_name='名称', max_length=64)
+    nav_name = models.CharField(verbose_name=u'名称', max_length=64)
     is_delete = models.BooleanField()
 
     class Meta:
         db_table = 'navigation'
-        verbose_name = '导航'
+        verbose_name = u'导航栏'
         verbose_name_plural = verbose_name
 
 
 # 商城头条
 class Headline(models.Model):
     hid = models.AutoField(verbose_name='ID', primary_key=True)
-    info = models.CharField(verbose_name='信息', max_length=255)
+    info = models.CharField(verbose_name=u'信息', max_length=255)
     status = models.BooleanField()
 
     class Meta:
         db_table = 'headline'
-        verbose_name = '商城头条',
+        verbose_name = u'商城头条',
         verbose_name_plural = verbose_name
 
 
@@ -59,83 +59,83 @@ class ImageStorage(FileSystemStorage):
 # 轮播图
 class Banner(models.Model):
     banner_id = models.AutoField('ID', primary_key=True)
-    title = models.CharField('标题', max_length=100)
-    image = models.ImageField('轮播图', upload_to='banner/%Y%m%d', storage=ImageStorage(), max_length=100)
-    detail_url = models.CharField('访问地址', max_length=200)
-    order = models.IntegerField('顺序', default=1)
-    create_time = models.DateTimeField('添加时间', auto_now_add=True)
-    is_delete = models.BooleanField('状态')
+    title = models.CharField(u'标题', max_length=100)
+    image = models.ImageField(u'轮播图', upload_to='banner/%Y%m%d', storage=ImageStorage(), max_length=100)
+    detail_url = models.CharField(u'访问地址', max_length=200)
+    order = models.IntegerField(u'顺序', default=1)
+    create_time = models.DateTimeField(u'添加时间', auto_now_add=True)
+    is_delete = models.BooleanField(u'状态')
 
     def __str__(self):
         return self.title
 
     class Meta:
         db_table = 'banner'
-        verbose_name = '轮播图'
+        verbose_name = u'轮播图'
         verbose_name_plural = verbose_name
 
 
 # 商品三级菜单
 class Category(models.Model):
-    cate_id = models.AutoField(verbose_name='分类ID', primary_key=True)
+    cate_id = models.AutoField(verbose_name=u'分类ID', primary_key=True)
     # 当前类别所属父id
-    parent_id = models.IntegerField(verbose_name='父ID')
+    parent_id = models.IntegerField(verbose_name=u'父ID')
     # 分类级别1/2/3   1代表一级菜单 2代表二级菜单 3代表三级菜单
-    level = models.IntegerField(verbose_name='分类级别', null=False)
+    level = models.IntegerField(verbose_name=u'分类级别', null=False)
     # 商品名称
-    name = models.CharField(verbose_name='商品名称', max_length=255, unique=True)
-    create_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    name = models.CharField(verbose_name=u'商品名称', max_length=255, unique=True)
+    create_time = models.DateTimeField(verbose_name=u'创建时间', auto_now_add=True)
     # 0未删除  1删除
-    is_delete = models.BooleanField('状态', default=False)
+    is_delete = models.BooleanField(u'状态', default=False)
 
     def __str__(self):
         return self.name
 
     class Meta:
         db_table = 'category'
-        verbose_name = '分类菜单'
-        verbose_name_plural = '菜单管理'
+        verbose_name = u'分类菜单'
+        verbose_name_plural = u'菜单管理'
 
 
 # 商品表
 class Shop(models.Model):
-    shop_id = models.IntegerField(verbose_name='商品ID', primary_key=True)
-    name = models.CharField(verbose_name='商品名称', max_length=100)
-    original_price = models.DecimalField(verbose_name='原价', max_digits=7, decimal_places=2)
-    promote_price = models.DecimalField(verbose_name='折扣价', max_digits=7, decimal_places=2)
-    stock = models.IntegerField(verbose_name='库存')
+    shop_id = models.IntegerField(verbose_name=u'商品ID', primary_key=True)
+    name = models.CharField(verbose_name=u'商品名称', max_length=100)
+    original_price = models.DecimalField(verbose_name=u'原价', max_digits=7, decimal_places=2)
+    promote_price = models.DecimalField(verbose_name=u'折扣价', max_digits=7, decimal_places=2)
+    stock = models.IntegerField(verbose_name=u'库存')
     # 外键，与商品分类表Cate建立一对多关联
-    cate = models.ForeignKey(Category, models.DO_NOTHING, db_column='cate_id', db_index=True, verbose_name='商品分类')
-    create_date = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    cate = models.ForeignKey(Category, models.DO_NOTHING, db_column='cate_id', db_index=True, verbose_name=u'商品分类')
+    create_date = models.DateTimeField(verbose_name=u'创建时间', auto_now_add=True)
     # 是否热卖  0 非热卖  1热卖商品
-    is_hot = models.BooleanField(verbose_name='热卖商品', default=False)
+    is_hot = models.BooleanField(verbose_name=u'热卖商品', default=False)
     # 销量
-    sale = models.IntegerField(verbose_name='商品销量')
+    sale = models.IntegerField(verbose_name=u'商品销量')
     # 排序 1表示升序  2表示降序
-    sort = models.IntegerField(verbose_name='排序')
+    sort = models.IntegerField(verbose_name=u'排序')
     # 商品状态 0有效  1删除
-    is_delete = models.BooleanField(verbose_name='商品状态', default=False)
+    is_delete = models.BooleanField(verbose_name=u'商品状态', default=False)
 
     def __str__(self):
         return self.name
 
     class Meta:
         db_table = 'shop'
-        verbose_name = '商品信息'
-        verbose_name_plural = '商品管理'
+        verbose_name = u'商品信息'
+        verbose_name_plural = u'商品管理'
 
 
 # 商品分类
 class Search(models.Model):
     s_id = models.AutoField('ID', primary_key=True)
     # 外键
-    shop = models.ForeignKey(verbose_name='商品id', to=Shop, on_delete=models.DO_NOTHING, db_column='cate_id')
+    shop = models.ForeignKey(verbose_name=u'商品id', to=Shop, on_delete=models.DO_NOTHING, db_column='cate_id')
     # 品牌
-    brand = models.CharField(verbose_name='品牌', max_length=64)
+    brand = models.CharField(verbose_name=u'品牌', max_length=64)
     # 种类
-    type = models.CharField(verbose_name='种类', max_length=64)
+    type = models.CharField(verbose_name=u'种类', max_length=64)
     # 选购热点
-    buy_hot = models.CharField(verbose_name='选购热点', max_length=64)
+    buy_hot = models.CharField(verbose_name=u'选购热点', max_length=64)
     is_delete = models.BooleanField()
 
     class Meta:
@@ -144,10 +144,10 @@ class Search(models.Model):
 
 # 商品详细参数名
 class Property(models.Model):
-    property_id = models.AutoField('商品参数名', primary_key=True)
-    name = models.CharField('属性名称', max_length=64)
+    property_id = models.AutoField(u'商品参数名', primary_key=True)
+    name = models.CharField(u'属性名称', max_length=64)
     # 外键，与商品表Shop建立一对多关联
-    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name="商品ID")
+    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name=u"商品ID")
     is_delete = models.BooleanField(default=0)
 
     def __str__(self):
@@ -155,7 +155,7 @@ class Property(models.Model):
 
     class Meta:
         db_table = 'property'
-        verbose_name = '商品属性'
+        verbose_name = u'商品属性'
         verbose_name_plural = verbose_name
 
 
@@ -163,8 +163,8 @@ class Property(models.Model):
 class PropertyValue(models.Model):
     pro_value_id = models.IntegerField(verbose_name='ID', primary_key=True)
     # shop = models.ForeignKey(Shop, on_delete=models.CASCADE, db_column='shop_id', verbose_name="商品ID")
-    property = models.ForeignKey(Property, on_delete=models.CASCADE, db_column='property_id', verbose_name="属性ID")
-    value = models.CharField('属性值', max_length=255)
+    property = models.ForeignKey(Property, on_delete=models.CASCADE, db_column='property_id', verbose_name=u"属性ID")
+    value = models.CharField(u'属性值', max_length=255)
     is_delete = models.BooleanField(default=False)
 
     def __str__(self):
@@ -172,7 +172,7 @@ class PropertyValue(models.Model):
 
     class Meta:
         db_table = 'property_value'
-        verbose_name = '商品属性值'
+        verbose_name = u'商品属性值'
         verbose_name_plural = verbose_name
 
 
@@ -180,9 +180,9 @@ class PropertyValue(models.Model):
 class Image(models.Model):
     img_id = models.AutoField(primary_key=True)
     # 外键
-    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name='商品ID')
-    type = models.CharField('图片类型', max_length=32, blank=True, null=True)
-    img_url = models.CharField('图片地址', max_length=255)
+    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name=u'商品ID')
+    type = models.CharField(u'图片类型', max_length=32, blank=True, null=True)
+    img_url = models.CharField(u'图片地址', max_length=255)
     is_delete = models.BooleanField(default=False)
 
     def __str__(self):
@@ -190,8 +190,8 @@ class Image(models.Model):
 
     class Meta:
         db_table = 'image'
-        verbose_name = '商品图片'
-        verbose_name_plural = '商品图片管理'
+        verbose_name = u'商品图片'
+        verbose_name_plural = u'商品图片管理'
 
 
 # 订单表
@@ -202,23 +202,24 @@ class Order(models.Model):
         (-1, '删除'),
     )
 
-    oid = models.AutoField('订单ID', primary_key=True)
+    oid = models.AutoField(u'订单ID', primary_key=True)
     # 订单号唯一
-    order_code = models.CharField('订单号', max_length=255)
-    address = models.CharField('配送地址', max_length=255,)
-    postcode = models.CharField('邮编', max_length=100)
-    receiver = models.CharField('收货人', max_length=100)
-    mobile = models.CharField('手机号', max_length=11,)
-    user_message = models.CharField('附加信息', max_length=255)
-    create_date = models.DateTimeField('创建日期', max_length=0)
-    pay_date = models.DateTimeField('支付时间', max_length=0,
+    order_code = models.CharField(u'订单号', max_length=255)
+    address = models.CharField(u'配送地址', max_length=255, )
+    postcode = models.CharField(u'邮编', max_length=100)
+    receiver = models.CharField(u'收货人', max_length=100)
+    mobile = models.CharField(u'手机号', max_length=11, )
+    user_message = models.CharField(u'附加信息', max_length=255)
+    create_date = models.DateTimeField(u'创建日期', max_length=0)
+    pay_date = models.DateTimeField(u'支付时间', max_length=0,
                                     blank=True, null=True)
-    delivery_date = models.DateTimeField('交易日期', blank=True)
-    confirm_date = models.DateTimeField('确认日期', blank=True)
+    delivery_date = models.DateTimeField(u'交易日期', blank=True)
+    confirm_date = models.DateTimeField(u'确认日期', blank=True)
     """ 1正常 0 异常, -1 删除 """
-    status = models.IntegerField('订单状态', choices=ORDER_STATUS, default=1)
-    user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name="用户ID", related_name='user_order')
-    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', verbose_name="商品ID",
+    status = models.IntegerField(u'订单状态', choices=ORDER_STATUS, default=1)
+    user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name=u"用户ID",
+                             related_name='user_order')
+    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', verbose_name=u"商品ID",
                              related_name='shop_order')
 
     def __str__(self):
@@ -226,25 +227,25 @@ class Order(models.Model):
 
     class Meta:
         db_table = 'order'
-        verbose_name = '订单'
-        verbose_name_plural = '订单管理'
+        verbose_name = u'订单'
+        verbose_name_plural = u'订单管理'
 
 
 # 购物车表
 class ShopCar(models.Model):
     car_id = models.AutoField(verbose_name='ID', primary_key=True)
-    number = models.IntegerField(verbose_name='商品数量', default=0)
-    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, verbose_name='商品ID', related_name='shop_shopcar')
-    user = models.ForeignKey('User', on_delete=models.DO_NOTHING, db_column='uid', verbose_name='用户ID',
+    number = models.IntegerField(verbose_name=u'商品数量', default=0)
+    shop = models.ForeignKey(Shop, on_delete=models.DO_NOTHING, verbose_name=u'商品ID', related_name='shop_shopcar')
+    user = models.ForeignKey('User', on_delete=models.DO_NOTHING, db_column='uid', verbose_name=u'用户ID',
                              related_name='user_shopcar')
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, db_column='oid', null=True, verbose_name='商品ID',
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, db_column='oid', null=True, verbose_name=u'商品ID',
                               related_name='order_shopcar')
     # 1正常 0删除 ， 禁止 2
     status = models.IntegerField(default=1)
 
     class Meta:
         db_table = 'shop_car'
-        verbose_name = '购物车'
+        verbose_name = u'购物车'
         verbose_name_plural = verbose_name
 
 
@@ -255,8 +256,8 @@ class User(AbstractUser):
     desc = models.CharField(max_length=255, null=True, blank=True)
     icon = models.ImageField(verbose_name=u'头像', max_length=100, upload_to='upload/img/%Y%m%d',
                              default=u"apps/static/img/default.png")
-    _paypasswd = models.CharField(verbose_name='支付密码', max_length=128)
-    id_num = models.CharField(verbose_name='身份证号', max_length=128)
+    _paypasswd = models.CharField(verbose_name=u'支付密码', max_length=128)
+    id_num = models.CharField(verbose_name=u'身份证号', max_length=128)
 
     @property
     def paypasswd(self):
@@ -283,7 +284,7 @@ class User(AbstractUser):
         """
         return u'<img width=50px src="%s" />' % self.icon.url
 
-    img_show.short_description = '头像111111'
+    img_show.short_description = u'头像'
     # 允许显示HTML tag
     img_show.allow_tags = True
 
@@ -291,48 +292,48 @@ class User(AbstractUser):
 # 商品评论表
 class Review(models.Model):
     review_id = models.AutoField('ID', primary_key=True)
-    content = models.CharField('内容', max_length=4000, )
-    create_date = models.DateTimeField('创建时间', auto_now_add=True)
-    shop = models.ForeignKey('Shop', models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name="商品ID",
+    content = models.CharField(u'内容', max_length=4000, )
+    create_date = models.DateTimeField(u'创建时间', auto_now_add=True)
+    shop = models.ForeignKey('Shop', models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name=u"商品ID",
                              related_name='shop_review')
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', db_index=True,
-                             verbose_name='用户ID', related_name='user_review')
+                             verbose_name=u'用户ID', related_name='user_review')
     is_delete = models.BooleanField()
 
     class Meta:
         db_table = 'review'
-        verbose_name = '用户评论'
+        verbose_name = u'用户评论'
         verbose_name_plural = verbose_name
 
 
 # 商品收藏表
 class Collect(models.Model):
     cid = models.AutoField(primary_key=True, verbose_name='ID')
-    user = models.ForeignKey(User, models.CASCADE, db_column='uid', db_index=True, verbose_name="用户ID",
+    user = models.ForeignKey(User, models.CASCADE, db_column='uid', db_index=True, verbose_name=u"用户ID",
                              related_name='user_collect')
-    shop = models.ForeignKey(Shop, models.CASCADE, db_column='shop_id', db_index=True, verbose_name="商品ID",
+    shop = models.ForeignKey(Shop, models.CASCADE, db_column='shop_id', db_index=True, verbose_name=u"商品ID",
                              related_name='shop_collect')
-    create_date = models.DateTimeField('创建时间', auto_now_add=True)
+    create_date = models.DateTimeField(u'创建时间', auto_now_add=True)
     is_delete = models.BooleanField()
 
     class Meta:
         db_table = 'collect'
-        verbose_name = '商品收藏'
+        verbose_name = u'商品收藏'
         verbose_name_plural = verbose_name
 
 
 # 用户地址表
 class Address(models.Model):
-    aid = models.AutoField(primary_key=True, verbose_name='地址ID')
-    province = models.CharField(max_length=64, verbose_name='省')
-    city = models.CharField(max_length=64, verbose_name='市')
-    detail_loc = models.CharField(max_length=255, null=False, verbose_name='详细地址')
+    aid = models.AutoField(primary_key=True, verbose_name=u'地址ID')
+    province = models.CharField(max_length=64, verbose_name=u'省')
+    city = models.CharField(max_length=64, verbose_name=u'市')
+    detail_loc = models.CharField(max_length=255, null=False, verbose_name=u'详细地址')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, db_column='uid', db_index=True,
-                             verbose_name="用户ID")
-    create_date = models.DateTimeField('创建时间', auto_now_add=True)
+                             verbose_name=u"用户ID")
+    create_date = models.DateTimeField(u'创建时间', auto_now_add=True)
     is_detele = models.BooleanField()
 
     class Meta:
         db_table = 'address'
-        verbose_name = '用户地址'
+        verbose_name = u'用户地址'
         verbose_name_plural = verbose_name
