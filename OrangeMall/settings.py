@@ -40,6 +40,7 @@ SYS_APPS = [
 EXT_APPS = [
     'crispy_forms',
     'xadmin',
+    'reversion',
 ]
 
 # 自定义功能模块
@@ -92,27 +93,17 @@ WSGI_APPLICATION = 'OrangeMall.wsgi.application'
 # ----------------------------------------------------------------------
 # 数据库配置
 # ----------------------------------------------------------------------
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'omdb',
-#         'POST': '3306',
-#         'USER': 'root',
-#         'PASSWORD': 'root',
-#         'HOST': '192.168.50.50',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_shopping',
+        'NAME': 'omdb',
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-
+        'HOST': '192.168.50.16',
     }
 }
+
 # ----------------------------------------------------------------------
 #                           用户密码验证配置
 # ----------------------------------------------------------------------
@@ -156,7 +147,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/search/static'),
     os.path.join(BASE_DIR, 'apps/account/static'),
     os.path.join(BASE_DIR, 'apps/car/static'),
-    os.path.join(BASE_DIR, 'apps/order/static'),
 )
 
 # 指定自定义用户模型所在的位置
@@ -193,7 +183,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #     'session': {
 #         'BACKEND': 'django_redis.cache.RedisCache',
 #         # 缓存地址
-#         "LOCATION": "redis://192.168.50.50:6379/3",
+#         "LOCATION": "redis://192.168.50.16:6379/3",
 #         "OPTIONS": {
 #             # 'PASSWORD':123
 #             # 使用线程池管理连接
