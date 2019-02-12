@@ -246,17 +246,20 @@
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
                                     {% for shop in shop_list %}
                                         <li>
-                                            <div class="i-pic limit">
-                                                <img src="/static/img/big/{{ shop.img_url }}.jpg">
-                                                <p class="title fl">{{ shop.name }}</p>
-                                                <p class="price fl">
-                                                    <b>¥</b>
-                                                    <strong>{{ shop.original_price }}</strong>
-                                                </p>
-                                                <p class="number fl">
-                                                    销量<span>{{ shop.sale }}</span>
-                                                </p>
-                                            </div>
+                                            <a href="{% url 'detail' %}?id={{ shop.shop_id }}">
+                                                <div class="i-pic limit">
+                                                    <img src="/static/img/big/{{ shop.img_url }}.jpg">
+                                                    <p class="title fl">{{ shop.name }}</p>
+                                                    <p class="price fl">
+                                                        <b>¥</b>
+                                                        <strong>{{ shop.original_price }}</strong>
+                                                    </p>
+                                                    <p class="number fl">
+                                                        销量<span>{{ shop.sale }}</span>
+                                                    </p>
+                                                </div>
+                                            </a>
+
                                         </li>
                                     {% endfor %}
                                 </ul>
