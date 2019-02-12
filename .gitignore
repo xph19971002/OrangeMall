@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
 # C extensions
 *.so
 
@@ -121,3 +122,4 @@ apps/search/migrations/
 apps/account/migrations/
 apps/detail/migrations/
 static/img/
+
