@@ -42,7 +42,7 @@ class ImageStorage(FileSystemStorage):
         # 初始化
         super().__init__(location, base_url)
         # 重写 _save方法
-
+    
     # uploaad/img/img_afsfsfds.png
     # 修改文件的名称
     def _save(self, name, content):
@@ -69,19 +69,19 @@ class Banner(models.Model):
 
     def __str__(self):
         return self.title
-
+    
     class Meta:
         db_table = 'banner'
         verbose_name = u'轮播图'
         verbose_name_plural = verbose_name
-
+    
     def img_show(self):
         """
         后台显示图片
         :return:
         """
         return u'<img width=50px src="%s" />' % self.detail_url
-
+    
     img_show.short_description = u'缩略图'
     # 允许显示HTML tag
     img_show.allow_tags = True
@@ -102,7 +102,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
+    
     class Meta:
         db_table = 'category'
         verbose_name = u'分类菜单'
@@ -130,7 +130,7 @@ class Shop(models.Model):
 
     def __str__(self):
         return self.name
-
+    
     class Meta:
         db_table = 'shop'
         verbose_name = u'商品信息'
@@ -164,7 +164,7 @@ class Property(models.Model):
 
     def __str__(self):
         return self.name
-
+    
     class Meta:
         db_table = 'property'
         verbose_name = u'商品属性'
@@ -181,7 +181,7 @@ class PropertyValue(models.Model):
 
     def __str__(self):
         return self.value
-
+    
     class Meta:
         db_table = 'property_value'
         verbose_name = u'商品属性值'
@@ -199,19 +199,19 @@ class Image(models.Model):
 
     def __str__(self):
         return self.img_id
-
+    
     class Meta:
         db_table = 'image'
         verbose_name = u'商品图片'
         verbose_name_plural = u'商品图片管理'
-
+    
     def img_show(self):
         """
         后台显示图片
         :return:
         """
         return u'<img width=50px src=r"/static/img/(.*?)/%s" />' % self.img_url
-
+    
     img_show.short_description = u'缩略图'
     # 允许显示HTML tag
     img_show.allow_tags = True
@@ -228,10 +228,10 @@ class Order(models.Model):
     oid = models.AutoField(u'订单ID', primary_key=True)
     # 订单号唯一
     order_code = models.CharField(u'订单号', max_length=255)
-    address = models.CharField(u'配送地址', max_length=255, )
+    address = models.CharField('配送地址', max_length=255,)
     postcode = models.CharField(u'邮编', max_length=100)
     receiver = models.CharField(u'收货人', max_length=100)
-    mobile = models.CharField(u'手机号', max_length=11, )
+    mobile = models.CharField(u'手机号', max_length=11,)
     user_message = models.CharField(u'附加信息', max_length=255)
     create_date = models.DateTimeField(u'创建日期', max_length=0)
     pay_date = models.DateTimeField(u'支付时间', max_length=0,
@@ -242,10 +242,9 @@ class Order(models.Model):
     status = models.IntegerField(u'订单状态', choices=ORDER_STATUS, default=1)
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name=u"用户ID",
                              related_name='user_order')
-
     def __str__(self):
         return self.order_code
-
+    
     class Meta:
         db_table = 'order'
         verbose_name = u'订单'
@@ -283,28 +282,28 @@ class User(AbstractUser):
     @property
     def paypasswd(self):
         return self._paypasswd
-
+    
     @paypasswd.setter
     def paypasswd(self, paypasswd):
         # 支付密码加密
         self._paypasswd = make_password(paypasswd, 'pbkdf2_sha256')
-
+    
     def verify_paypasswd(self, paypasswd):
         # 验证支付密码
         return check_password(paypasswd, self._paypasswd)
-
+    
     class Meta:
         db_table = 'user'
         verbose_name = '用户管理'
         verbose_name_plural = verbose_name
-
+    
     def img_show(self):
         """
         后台显示图片
         :return:
         """
         return u'<img width=30px src="%s" />' % self.icon.url
-
+    
     img_show.short_description = u'头像'
     # 允许显示HTML tag
     img_show.allow_tags = True
