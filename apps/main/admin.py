@@ -36,20 +36,20 @@ class NavigationXadmin:
 xadmin.site.register(Navigation, NavigationXadmin)
 
 
-# 后台新闻头条
-class HeadlineXadmin:
-    list_display = ['hid', 'info', 'status']
-
-
-xadmin.site.register(Headline, HeadlineXadmin)
-
-
 # 后台轮播图
 class BannerXadmin:
     list_display = ['banner_id', 'title', 'img_show', 'detail_url', 'order', 'create_time', 'is_delete']
 
 
 xadmin.site.register(Banner, BannerXadmin)
+
+
+# 后台新闻头条
+class HeadlineXadmin:
+    list_display = ['hid', 'info', 'status']
+
+
+xadmin.site.register(Headline, HeadlineXadmin)
 
 
 # 后台商品管理
@@ -73,16 +73,16 @@ class ShopXadmin:
 xadmin.site.register(Shop, ShopXadmin)
 
 
+class ShopImageXadmin(ShopXadmin):
+    list_display = ['img_id', 'img_show', 'shop', 'type', 'img_url', 'is_delete']
+
+
+xadmin.site.register(Image, ShopImageXadmin)
+
+
 class UserXadmin(auth.UserAdmin):
     list_display = ['id', 'username', 'img_show', 'email', 'phone', 'is_active']
 
 
 xadmin.site.unregister(User)
 xadmin.site.register(User, UserXadmin)
-
-
-class ShopImageXadmin(ShopXadmin):
-    list_display = ['img_id', 'img_show', 'shop', 'type', 'img_url', 'is_delete']
-
-
-xadmin.site.register(Image, ShopImageXadmin)
