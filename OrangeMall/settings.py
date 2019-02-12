@@ -147,7 +147,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/search/static'),
     os.path.join(BASE_DIR, 'apps/account/static'),
     os.path.join(BASE_DIR, 'apps/car/static'),
-    os.path.join(BASE_DIR, 'apps/order/static'),
 )
 
 # 指定自定义用户模型所在的位置
