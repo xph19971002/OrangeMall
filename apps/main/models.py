@@ -1,5 +1,6 @@
 import os
 import time
+import re
 
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import AbstractUser
@@ -74,6 +75,17 @@ class Banner(models.Model):
         verbose_name = u'轮播图'
         verbose_name_plural = verbose_name
 
+    def img_show(self):
+        """
+        后台显示图片
+        :return:
+        """
+        return u'<img width=50px src="%s" />' % self.detail_url
+
+    img_show.short_description = u'缩略图'
+    # 允许显示HTML tag
+    img_show.allow_tags = True
+
 
 # 商品三级菜单
 class Category(models.Model):
@@ -106,7 +118,7 @@ class Shop(models.Model):
     stock = models.IntegerField(verbose_name=u'库存')
     # 外键，与商品分类表Cate建立一对多关联
     cate = models.ForeignKey(Category, models.DO_NOTHING, db_column='cate_id', db_index=True, verbose_name=u'商品分类')
-    create_date = models.DateTimeField(verbose_name=u'创建时间', auto_now = True)
+    create_date = models.DateTimeField(verbose_name=u'创建时间', auto_now=True)
     # 是否热卖  0 非热卖  1热卖商品
     is_hot = models.BooleanField(verbose_name=u'热卖商品', default=False)
     # 销量
@@ -178,12 +190,12 @@ class PropertyValue(models.Model):
 
 # 商品图片
 class Image(models.Model):
-    img_id = models.AutoField(primary_key=True)
+    img_id = models.AutoField(verbose_name='ID', primary_key=True)
     # 外键
-    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name=u'商品ID')
-    type = models.CharField(u'图片类型', max_length=32, blank=True, null=True)
-    img_url = models.CharField(u'图片地址', max_length=255)
-    is_delete = models.BooleanField(default=False)
+    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name=u'商品名称')
+    type = models.CharField(verbose_name=u'图片类型', max_length=32, blank=True, null=True)
+    img_url = models.CharField(verbose_name=u'图片地址', max_length=255)
+    is_delete = models.BooleanField(verbose_name=u'状态', default=False)
 
     def __str__(self):
         return self.img_id
@@ -192,6 +204,17 @@ class Image(models.Model):
         db_table = 'image'
         verbose_name = u'商品图片'
         verbose_name_plural = u'商品图片管理'
+
+    def img_show(self):
+        """
+        后台显示图片
+        :return:
+        """
+        return u'<img width=50px src=r"/static/img/(.*?)/%s" />' % self.img_url
+
+    img_show.short_description = u'缩略图'
+    # 允许显示HTML tag
+    img_show.allow_tags = True
 
 
 # 订单表
@@ -219,8 +242,6 @@ class Order(models.Model):
     status = models.IntegerField(u'订单状态', choices=ORDER_STATUS, default=1)
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name=u"用户ID",
                              related_name='user_order')
-    shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', verbose_name=u"商品ID",
-                             related_name='shop_order')
 
     def __str__(self):
         return self.order_code
@@ -252,7 +273,7 @@ class ShopCar(models.Model):
 # 用户表
 # 拓展user
 class User(AbstractUser):
-    phone = models.CharField(max_length=11, default='110')
+    phone = models.CharField(verbose_name=u'手机号', max_length=11, default='110')
     desc = models.CharField(max_length=255, null=True, blank=True)
     icon = models.ImageField(verbose_name=u'头像', max_length=100, upload_to='upload/img/%Y%m%d',
                              default=u"apps/static/img/default.png")
@@ -282,7 +303,7 @@ class User(AbstractUser):
         后台显示图片
         :return:
         """
-        return u'<img width=50px src="%s" />' % self.icon.url
+        return u'<img width=30px src="%s" />' % self.icon.url
 
     img_show.short_description = u'头像'
     # 允许显示HTML tag
