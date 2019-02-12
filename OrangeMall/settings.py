@@ -183,7 +183,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #     'session': {
 #         'BACKEND': 'django_redis.cache.RedisCache',
 #         # 缓存地址
-#         "LOCATION": "redis://192.168.50.50:6379/3",
+#         "LOCATION": "redis://192.168.50.16:6379/3",
 #         "OPTIONS": {
 #             # 'PASSWORD':123
 #             # 使用线程池管理连接
