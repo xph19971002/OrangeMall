@@ -81,7 +81,7 @@ xadmin.site.register(Image, ShopImageXadmin)
 
 
 class UserXadmin(auth.UserAdmin):
-    list_display = ['id', 'username', 'img_show', 'email', 'phone', 'is_active']
+    list_display = ['id', 'username', 'img_show', 'email', 'phone', 'is_active', 'is_superuser']
 
 
 xadmin.site.unregister(User)
