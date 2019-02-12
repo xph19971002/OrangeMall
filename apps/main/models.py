@@ -210,7 +210,7 @@ class Image(models.Model):
         后台显示图片
         :return:
         """
-        return u'<img width=50px src=r"/static/img/(.*?)/%s" />' % self.img_url
+        return u'<img width=50px src="/static/img/small/%s.jpg" />' % self.img_url
 
     img_show.short_description = u'缩略图'
     # 允许显示HTML tag
