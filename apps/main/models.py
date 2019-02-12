@@ -219,8 +219,6 @@ class Order(models.Model):
     status = models.IntegerField(u'订单状态', choices=ORDER_STATUS, default=1)
     user = models.ForeignKey('User', models.DO_NOTHING, db_column='uid', verbose_name=u"用户ID",
                              related_name='user_order')
-    # shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', verbose_name=u"商品ID",
-    #                          related_name='shop_order')
 
     def __str__(self):
         return self.order_code
