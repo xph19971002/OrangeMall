@@ -273,7 +273,7 @@ class User(AbstractUser):
     phone = models.CharField(verbose_name=u'手机号', max_length=11, default='110')
     desc = models.CharField(max_length=255, null=True, blank=True)
     icon = models.ImageField(verbose_name=u'头像', max_length=100, upload_to='upload/img/%Y%m%d',
-                             default=u"apps/static/img/default.png")
+                             default=u"img/default.png")
     _paypasswd = models.CharField(verbose_name=u'支付密码', max_length=128)
     id_num = models.CharField(verbose_name=u'身份证号', max_length=128)
 
