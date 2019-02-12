@@ -1,8 +1,9 @@
 # 全局配置
 import xadmin
 from xadmin import views
+from xadmin.plugins import auth
 
-from apps.main.models import Navigation, Headline, Banner, Shop
+from apps.main.models import Navigation, Headline, Banner, Shop, User, Image
 
 
 class BaseStyleSettings:
@@ -45,7 +46,7 @@ xadmin.site.register(Headline, HeadlineXadmin)
 
 # 后台轮播图
 class BannerXadmin:
-    list_display = ['banner_id', 'title', 'detail_url', 'order', 'create_time', 'is_delete']
+    list_display = ['banner_id', 'title', 'img_show', 'detail_url', 'order', 'create_time', 'is_delete']
 
 
 xadmin.site.register(Banner, BannerXadmin)
@@ -66,13 +67,22 @@ class ShopXadmin:
                     'is_delete'
                     ]
     list_per_page = 10
+    search_fields = ['name', 'shop_id']
 
 
 xadmin.site.register(Shop, ShopXadmin)
 
-#
-# class UserXadmin:
-#     list_display = ['id', 'username']
-#
-#
-# xadmin.site.register(User, UserXadmin)
+
+class UserXadmin(auth.UserAdmin):
+    list_display = ['id', 'username', 'img_show', 'email', 'phone', 'is_active']
+
+
+xadmin.site.unregister(User)
+xadmin.site.register(User, UserXadmin)
+
+
+class ShopImageXadmin(ShopXadmin):
+    list_display = ['img_id', 'img_show', 'shop', 'type', 'img_url', 'is_delete']
+
+
+xadmin.site.register(Image, ShopImageXadmin)
