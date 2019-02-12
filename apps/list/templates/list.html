@@ -217,15 +217,29 @@
 
 									</dl>
 								</li>
+                                <li class="select-list">
+                                    <dl id="select2">
+                                        <dt class="am-badge am-round">价格区间</dt>
+                                        <div class="dd-conent">
+                                            <dd class="select-all selected"><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=0&sale_num={{ sale_num }}&price_sort={{ price_sort }}">全部</a></dd>
+                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=1&sale_num={{ sale_num }}&price_sort={{ price_sort }}">0~100</a></dd>
+                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=2&sale_num={{ sale_num }}&price_sort={{ price_sort }}">100~200</a></dd>
+                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=3&sale_num={{ sale_num }}&price_sort={{ price_sort }}">200~500</a></dd>
+                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=4&sale_num={{ sale_num }}&price_sort={{ price_sort }}">500+</a></dd>
+                                        </div>
+                                    </dl>
+                                </li>
 							</ul>
 							<div class="clear"></div>
                         </div>
 							<div class="search-content">
 								<div class="sort">
-									<li class="first"><a title="综合">综合排序</a></li>
-									<li><a title="销量">销量排序</a></li>
-									<li><a title="价格">价格优先</a></li>
-									<li class="big"><a title="评价" href="#">评价为主</a></li>
+									<li class="first"><a title="综合" href="{% url 'list:list' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=None&price_sort=None">综合排序</a></li>
+									<li><a title="销量" href="{% url 'list:list' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=1&price_sort=None">销量排序（降序）</a></li>
+                                    <li><a title="销量" href="{% url 'list:list' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=2&price_sort=None">销量排序（升序）</a></li>
+
+                                    <li><a title="价格" href="{% url 'list:list' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=None&price_sort=1">价格优先（降序）</a></li>
+                                    <li><a title="价格" href="{% url 'list:list' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=None&price_sort=2">价格优先（升序）</a></li>
 								</div>
 								<div class="clear"></div>
 
@@ -249,34 +263,48 @@
                             </div>
                         </div>
     </div>
-
-    {% if data %}
-            <ul id="pages" class="am-pagination am-pagination-right">
-                {% if data.first %}
-                    <li><a href="?page=1">1</a></li>
-                {% endif %}
-                {% if data.left %}
-                    {% if data.left_has_more %}
-                        <li><span>...</span></li>
+    <ul class="am-pagination am-pagination-right">
+                    {% if shops_page.has_previous  %}
+                        <li ><a  href="?page={{ shop_list.previous_page_number }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">&laquo;上一页</a></li>
+                    {% else %}
+                        <li class="am-disabled"><a>&laquo;上一页</a></li>
                     {% endif %}
-                    {% for i in data.left %}
-                        <li><a href="?page={{i}}">{{i}}</a></li>
+                    {% for pindex in pages %}
+                        <li {% if pindex == shop_list.number %}class="am-active"{% endif %}><a href="?page={{  pindex }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}" >{{ pindex }}</a></li>
                     {% endfor %}
-                {% endif %}
-                <li class="active"><a href="?page={{data.page}}">{{data.page}}</a></li>
-                {% if data.right %}
-                    {% for i in data.right %}
-                        <li><a href="?page={{i}}">{{i}}</a></li>
-                    {% endfor %}
-                    {% if data.right_has_more %}
-                        <li><span>...</span></li>
+                    {% if goods_page.has_next %}
+                        <li><a href="?page={{ shop_list.next_page_number }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">下一页&raquo;</a></li>
+                    {% else %}
+                        <li class="am-disabled"><a>下一页&raquo;</a></li>
                     {% endif %}
-                {% endif %}
-                {% if data.last %}
-                    <li><a href="?page={{data.total_pages}}">{{data.total_pages}}</a></li>
-                {% endif %}
-            </ul>
-    {% endif %}
+    </ul>
+{#    {% if data %}#}
+{#            <ul id="pages" class="am-pagination am-pagination-right">#}
+{#                {% if data.first %}#}
+{#                    <li><a href="{% url 'list:list' %}?page=1&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">1</a></li>#}
+{#                {% endif %}#}
+{#                {% if data.left %}#}
+{#                    {% if data.left_has_more %}#}
+{#                        <li><span>...</span></li>#}
+{#                    {% endif %}#}
+{#                    {% for i in data.left %}#}
+{#                        <li><a href="{% url 'list:list' %}?page={{ i }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">{{i}}</a></li>#}
+{#                    {% endfor %}#}
+{#                {% endif %}#}
+{#                <li class="active"><a href="{% url 'list:list' %}?page={{ data.page }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">{{data.page}}</a></li>#}
+{#                {% if data.right %}#}
+{#                    {% for i in data.right %}#}
+{#                        <li><a href="{% url 'list:list' %}?page={{ i }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">{{i}}</a></li>#}
+{#                    {% endfor %}#}
+{#                    {% if data.right_has_more %}#}
+{#                        <li><span>...</span></li>#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
+{#                {% if data.last %}#}
+{#                    <li><a href="{% url 'list:list' %}?page={{ data.total_pages }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">{{data.total_pages}}</a></li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#    {% endif %}#}
 {% endblock %}
 {% block page_footer %}
     {% include 'common/footer.html' %}
