@@ -40,6 +40,7 @@ SYS_APPS = [
 EXT_APPS = [
     'crispy_forms',
     'xadmin',
+    'reversion',
 ]
 
 # 自定义功能模块
