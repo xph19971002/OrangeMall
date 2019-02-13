@@ -38,9 +38,9 @@ def our_pay(request):
             # 订单标题
             subject="橘子商城-{}".format(int(trad_no)),
             # 支付成功之后 前端跳转的界面
-            return_url=None,
+            return_url='http://127.0.0.1:8000/car/list1/?order_code={0}'.format(trad_no),
             # 支付成功后台跳转接口
-            notify_url='http://127.0.0.1:8000/car/update/?order_code={0}'.format(trad_no)  # 可选, 不填则使用默认notify url
+            notify_url=None  # 可选, 不填则使用默认notify url
         )
         return redirect(PAY_URL_DEV + order_string)
 
