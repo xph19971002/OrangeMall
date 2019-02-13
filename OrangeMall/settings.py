@@ -243,7 +243,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 支付宝注册应用生成的id
 APP_ID = '2016092400583559'
-#
 # 测试环境下支付网关
 PAY_URL_DEV = 'https://openapi.alipaydev.com/gateway.do?'
 # 正式开发环境下支付网关
