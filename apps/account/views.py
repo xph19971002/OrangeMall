@@ -79,7 +79,7 @@ def register(request):
                                 else:
                                     return render(request, 'register.html', {'msg': '注册失败'})
                             else:
-                                return render(request, 'register.html', {'msg': '两次密码不一样或密码态短'})
+                                return render(request, 'register.html', {'msg': '两次密码不一样或密码太短'})
                         else:
                             return render(request, 'register.html', {'msg': '输入正确邮箱'})
                     else:
