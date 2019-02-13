@@ -37,7 +37,11 @@
             <p>
                 购物车
             </p>
-            <p class="cart_num">1</p>
+            {% if user.is_authenticated %}
+                <p class="cart_num" id="cart_num">(0)</p>
+            {% else %}
+                (0)
+            {% endif %}
         </div>
         <div id="asset " class="item ">
             <a href="# ">
@@ -100,3 +104,15 @@
     </div>
 
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        console.log('测试！！！！');
+        data={};
+        $.get("{% url 'car_shop_num' %}",data,function(result){
+            console.log(result.data);
+            $('#cart_num').text('('+result.data.car_num+')')
+        })
+
+    })
+</script>
