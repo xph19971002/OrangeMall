@@ -5,10 +5,10 @@ from django.shortcuts import render, redirect
 from OrangeMall.settings import APP_ID, APP_PRIVATE_KEY_STR, APP_PUBLIC_KEY_STR, PAY_URL_DEV
 
 
-def our_pay(request,amount=100,trad_no='1234556435'):
-    if request.method == 'GET':
-        amount = request.GET.get('amount')
-        trad_no = request.GET.get('trad_no')
+def our_pay(request):
+    if request.method == 'POST':
+        amount = request.POST.get('amount')
+        trad_no = request.POST.get('trad_no')
         alipay = AliPay(
             # 实例化Alipay对象
             appid=APP_ID,
@@ -27,12 +27,6 @@ def our_pay(request,amount=100,trad_no='1234556435'):
         return_url  支付完成之后前端跳转的界面 get请求
         notify_url 支付完成后台回调接口  post请求
         '''
-        # order_str = alipay.api_alipay_trade_page_pay(
-        #     subject='橘子商城订单',
-        #     out_trade_no=trad_no,
-        #     total_amount=amount,
-        #     return_url='http://127.0.0.1:8000/detail/info/',
-        # )
 
         order_string = alipay.api_alipay_trade_page_pay(
             # 订单号
