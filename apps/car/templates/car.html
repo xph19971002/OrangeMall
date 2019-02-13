@@ -42,7 +42,6 @@
         };
 
         $(function () {
-
             $('#buy_btn').click(function () {
                 let cars = [];
                 //遍历所有的选中的购物车记录
@@ -65,7 +64,8 @@
                     };
                     $.post('{% url 'confirm' %}', data, function (result) {
                         if (result.status === 200) {
-                            window.location.href = '/order/form/?oid=' + result.content.oid
+                            let total = $('#total').find('em').text();
+                            window.location.href = '/order/form/?oid=' + result.content.oid+'&'+total
                         }
                     })
                 }
