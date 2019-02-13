@@ -194,7 +194,7 @@ class Image(models.Model):
     # 外键
     shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name=u'商品名称')
     type = models.CharField(verbose_name=u'图片类型', max_length=32, blank=True, null=True)
-    img_url = models.CharField(verbose_name=u'图片地址', max_length=255)
+    img_url = models.CharField(verbose_name=u'图片名称', max_length=255)
     is_delete = models.BooleanField(verbose_name=u'状态', default=False)
 
     def __str__(self):
