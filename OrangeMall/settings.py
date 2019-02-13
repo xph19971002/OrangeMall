@@ -97,13 +97,11 @@ WSGI_APPLICATION = 'OrangeMall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        # 'NAME': 'omdb',
-        'NAME': 'django_shopping',
+        'NAME': 'omdb',
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        # 'HOST': '192.168.50.16',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.50.16',
     }
 }
 
@@ -245,7 +243,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 支付宝注册应用生成的id
 APP_ID = '2016092400583559'
-#
 # 测试环境下支付网关
 PAY_URL_DEV = 'https://openapi.alipaydev.com/gateway.do?'
 # 正式开发环境下支付网关
