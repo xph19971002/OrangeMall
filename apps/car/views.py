@@ -71,7 +71,6 @@ def confirm(request):
 # 生成订单信息
 def product_order(request):
     # 第一步生成订单号  全站必须唯一   尽量大于8位
-    # user_id = request.user.id
     order_code = f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}{random.randint(100000,999999)}"
     order = Order(order_code=order_code, user=request.user)
     if order:
