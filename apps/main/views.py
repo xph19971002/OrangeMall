@@ -1,8 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 from apps.main.models import Category, Headline, Banner, ShopCar, Shop
-
 
 def index(request):
     head_list = Headline.objects.all()
@@ -30,14 +29,23 @@ def index(request):
                 shop.image = shop.image_set.all().first()
             sub_cate.shops = shops
 
-    ######头部购物车数量######
-    user = request.user
-    shop_num = 0
-    car_shops = ShopCar.objects.filter(user=user.id, status=1)
-    for car_shop in car_shops:
-        shop_num += car_shop.number
-    request.session['car_shop_num'] = shop_num
     return render(request, 'index.html', locals())
+
+
+
+def car_shop_num(request):
+    car_num = 0
+    uid = request.user.id
+    shops_car=ShopCar.objects.filter(user=uid,status=1).all()
+    for shop_car in shops_car:
+        car_num += shop_car.number
+    data = {
+        'car_num':car_num
+    }
+    result ={'status':200,'msg':'ok','data':data}
+
+    return JsonResponse(result)
+    # return render(request,'./common/top.html',locals())
 
 
 

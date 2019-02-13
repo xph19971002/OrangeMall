@@ -185,7 +185,7 @@
                                             <div class="cart-title number">数量</div>
                     <dd>
                         <input id="min" class="am-btn am-btn-default" name="" type="button" value="-"/>
-                        <input id="text_box" name="shop_num" shop_id="{{ shop.shop_id }}" type="text" value="1" style="width:30px;"/>
+                        <input id="text_box" name="shop_num"  type="text" value="1" style="width:30px;"/>
                         <input id="add" class="am-btn am-btn-default" name="" type="button" value="+"/>
                         <span id="Stock" class="tb-hidden">库存<span class="stock">1000</span>件</span>
                     </dd>
@@ -220,12 +220,12 @@
     </div>
     <li>
         <div class="clearfix tb-btn tb-btn-buy theme-login">
-            <a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
+            <a id="LikBuy" title="点此按钮到下一步确认购买信息" href="{% url 'car_list' %}">立即购买</a>
         </div>
     </li>
     <li>
         <div class="clearfix tb-btn tb-btn-basket theme-login">
-            <a id="LikBasket" title="加入购物车" href="{% url 'car_list' %}"><i></i>加入购物车</a>
+            <a id="LikBasket" title="加入购物车" href=""><i></i>加入购物车</a>
         </div>
     </li>
 </div>
@@ -713,5 +713,32 @@
 
 <div style="display: none" class="jqPreload0">
     <img src="{% static 'img/big' %}/{{  imgs_first }}">
+
 </div>
+
+
+{#点击加入购物车操作#}
+<script>
+    $(function () {
+       $('#LikBasket').click(function () {
+            {#console.log('dhsghsd');#}
+            content = $('#text_box');
+            {#获取当前页面的url 返回值如：  ?id=123456  #}
+            key_word = window.location.search;
+            shop_id= key_word.split('=')[1];
+
+            data = {
+                shop_id :shop_id,
+                shop_num : content.attr('value'),
+                csrfmiddlewaretoken : $('input[name=csrfmiddlewaretoken]').val()
+            };
+
+            $.post("{% url 'detail' %}",data,function (result) {
+                if (result.status===200){
+                    console.log(result.data.msg)
+                }
+            });
+        });
+    });
+</script>
 

@@ -40,6 +40,7 @@ SYS_APPS = [
 EXT_APPS = [
     'crispy_forms',
     'xadmin',
+    'reversion',
 ]
 
 # 自定义功能模块
@@ -50,7 +51,8 @@ CUSTOM_APPS = [
     'apps.detail',
     'apps.list',
     'apps.car',
-    'apps.order'
+    'apps.order',
+    'apps.pay',
 ]
 
 INSTALLED_APPS = SYS_APPS + EXT_APPS + CUSTOM_APPS
@@ -92,27 +94,19 @@ WSGI_APPLICATION = 'OrangeMall.wsgi.application'
 # ----------------------------------------------------------------------
 # 数据库配置
 # ----------------------------------------------------------------------
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'omdb',
-#         'POST': '3306',
-#         'USER': 'root',
-#         'PASSWORD': 'root',
-#         'HOST': '192.168.50.50',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_shopping',
+        'NAME': 'omdb',
+        # 'NAME': 'orange_mall',
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '127.0.0.1',
-
+        'HOST': '192.168.50.16',
+        # 'HOST': '127.0.0.1',
     }
 }
+
 # ----------------------------------------------------------------------
 #                           用户密码验证配置
 # ----------------------------------------------------------------------
@@ -156,7 +150,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/search/static'),
     os.path.join(BASE_DIR, 'apps/account/static'),
     os.path.join(BASE_DIR, 'apps/car/static'),
-    os.path.join(BASE_DIR, 'apps/order/static'),
+    os.path.join(BASE_DIR,'apps/pay/static'),
 )
 
 # 指定自定义用户模型所在的位置
@@ -193,7 +187,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 #     'session': {
 #         'BACKEND': 'django_redis.cache.RedisCache',
 #         # 缓存地址
-#         "LOCATION": "redis://192.168.50.50:6379/3",
+#         "LOCATION": "redis://192.168.50.16:6379/3",
 #         "OPTIONS": {
 #             # 'PASSWORD':123
 #             # 使用线程池管理连接
@@ -250,13 +244,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ----------------------------------------------------------------------
 
 # 支付宝注册应用生成的id
-# APP_ID = '2016092300577618'
+APP_ID = '2016092400583559'
 #
 # 测试环境下支付网关
-# PAY_URL_DEV = 'https://openapi.alipaydev.com/gateway.do'
+PAY_URL_DEV = 'https://openapi.alipaydev.com/gateway.do?'
 # 正式开发环境下支付网关
-# PAY_URL = 'https://openapi.alipay.com/gateway.do'
+PAY_URL = 'https://openapi.alipay.com/gateway.do'
 # 配置私钥
-# APP_PRIVATE_KEY_STR = open(os.path.join(BASE_DIR,'pay/app_private_key.pem')).read()
+APP_PRIVATE_KEY_STR = open(os.path.join(BASE_DIR,'app_private_key.pem')).read()
 # 配置公钥
-# APP_PUBLIC_KEY_STR =open(os.path.join(BASE_DIR,'pay/app_public_key.pem')).read()
+APP_PUBLIC_KEY_STR =open(os.path.join(BASE_DIR,'app_public_key.pem')).read()

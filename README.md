@@ -17,7 +17,7 @@
     
     数据库 mysql （连接远程数据库服务器命令：mysql -u[账号] -p[密码] -P[端口号] -h[IP地址]）
         name： omdb
-        host： 192.168.50.50
+        host： 192.168.50.16
         port：3306
         username：   root
         password：   root
