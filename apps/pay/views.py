@@ -3,12 +3,14 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 from OrangeMall.settings import APP_ID, APP_PRIVATE_KEY_STR, APP_PUBLIC_KEY_STR, PAY_URL_DEV
+from apps.main.models import Order
 
 
 def our_pay(request):
-    if request.method == 'POST':
-        amount = request.POST.get('amount')
-        trad_no = request.POST.get('trad_no')
+    if request.method == 'GET':
+        oid = request.GET.get('oid')
+        amount= request.GET.get('total')
+        trad_no = Order.objects.filter(oid=oid).first().order_code
         alipay = AliPay(
             # 实例化Alipay对象
             appid=APP_ID,

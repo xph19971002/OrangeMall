@@ -65,7 +65,8 @@
                     };
                     $.post('{% url 'confirm' %}', data, function (result) {
                         if (result.status === 200) {
-                            window.location.href = '/order/form/?oid=' + result.content.oid
+                            let total = $('#total').find('em').text();
+                            window.location.href = '/pay/pay?oid=' + result.content.oid+'&total='+ total
                         }
                     })
                 }
