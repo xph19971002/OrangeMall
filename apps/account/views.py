@@ -33,7 +33,7 @@ def login_view(request):
                         return render(request,'login.html',{'msg':'账户未激活'})
                 else:
                     #用户名密码错误
-                    return render(request,'login.html',{'msg':'用户名密码错误'})
+                    return render(request,'login.html',{'msg':'用户名或密码错误'})
             else:
                 return render(request,'login.html',{'msg':'账号或密码不能为空'})
         except Exception as e:
