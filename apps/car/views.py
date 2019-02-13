@@ -79,3 +79,16 @@ def product_order(request):
         return order
     else:
         print('错误')
+
+
+#完成支付后，将订单和购物车中商品的状态进行更新
+def update_order(request):
+    if request.method=='POST':
+        order_code = request.GET.get('order_code')
+        order = Order.objects.first(order_code=order_code)
+        if order:
+            order.update(status=0)
+        car_shops =ShopCar.objects.filter(oid=order.first().oid)
+        for car_shop in car_shops:
+            car_shop.update(status=0)
+    return render(request,'car.html')
