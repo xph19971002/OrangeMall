@@ -717,15 +717,18 @@
 </div>
 
 
-{#点击加入购物车操作#}
+
 <script>
+
+    {#点击加入购物车操作#}
     $(function () {
-       $('#LikBasket').click(function () {
+        $('#LikBasket').click(function () {
             {#console.log('dhsghsd');#}
             content = $('#text_box');
             {#获取当前页面的url 返回值如：  ?id=123456  #}
             key_word = window.location.search;
             shop_id= key_word.split('=')[1];
+
 
             data = {
                 shop_id :shop_id,
@@ -740,5 +743,11 @@
             });
         });
     });
+
+    {# 鼠标覆盖小图，显示该小图对应的大图 #}
+    $(function () {
+
+    })
+
 </script>
 
