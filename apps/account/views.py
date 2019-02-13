@@ -1,14 +1,13 @@
-
+import re
 from django.contrib.auth.decorators import  login_required
-from django.contrib.auth import authenticate ,logout, login
+from django.contrib.auth import logout, login ,authenticate
 from django.db.models import Q
-from django.http import HttpResponse
-from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from apps.main.models import User
+from django.contrib.auth.hashers import check_password
 
-
+#登录
 def login_view(request):
     if request.method == 'GET':
         return render(request,'login.html')
@@ -18,24 +17,32 @@ def login_view(request):
             password = request.POST.get('password')
             # 判断密码和账号输入是否为空
             if username and password:
-                # 验证用户名和密码是否存在
+                # 认证一组给定的用户和密码,如果密码能够匹配给定的用户名，
+                # 它将返回一个User对象，如果密码无效，authenticate()返回None
                 user = authenticate(username=username,password=password)
-                if user:
-                    # 如果用户名与密码都正确，表示登录成功，记住登录状态
-                    login(request,user)
-                    # 如果是验证登录就跳转登录界面，如果是直接登录的就跳转首页
-                    return redirect('/')
+                if user is not None:
+                    #用户名密码正确
+                    if user.is_active:
+                        #用户已激活
+                        #记录用户的登录状态
+                        login(request,user)
+                        #跳转到首页
+                        return redirect('/')
+                    else:
+                        #用户未激活
+                        return render(request,'login.html',{'msg':'账户未激活'})
                 else:
-                    return render(request,'login.html',{'msg':'用户名或密码有误'})
+                    #用户名密码错误
+                    return render(request,'login.html',{'msg':'用户名密码错误'})
             else:
-                return render(request,'login.html',{'msg':'密码或账号不能为空'})
+                return render(request,'login.html',{'msg':'账号或密码不能为空'})
         except Exception as e:
             return render(request,'login.html',{'msg':'登录失败'})
     else:
         return render(request,'login.html',{'msg':'无效请求方式'})
 
 
-
+#注册
 def register(request):
     if request.method == 'GET':
         return render(request,'register.html')
@@ -46,27 +53,41 @@ def register(request):
             phone = request.POST.get('phone')
             email = request.POST.get('email')
             pwdRepeat = request.POST.get('pwdRepeat')
+
             # 判断输入用户名、密码.....输入是否为空
             if username and password and phone and email and pwdRepeat:
-                #注册
                 user = User.objects.filter(Q(username=username) | Q(phone=phone) | Q(email=email))
+                #判断输入的信息是否存在
                 if user.exists():
-                    return render(request,'register.html',{'msg':'用户名、手机号或邮箱已存在！'})
+                    return render(request,'register.html',{'msg':'用户名、手机号或邮箱已占用！'})
                 else:
-                    # 保存用户操作
-                    user = User.objects.create_user(username=username,password=password,phone=phone,email=email)
-                    if user:
-                        # 如果注册成功，直接记住用户登录状态，跳转登录界面
-                        login(request,user)
-                        # 反向解析
-                        url=reverse('account:login')
-                        return redirect(url)
+                    #判断电话号码
+                    if re.match(r'^1[35678]\d{9}$',phone):
+                        #判断邮箱
+                        if re.match(r'^[0-9a-zA-Z_]{0,19}@[0-9a-zA-Z]{1,13}\.[com,cn,net]{1,3}$', email):
+                            #判断两次密码是否一致 和密码长度
+                            if password == pwdRepeat and len(password) > 5:
+                                # 保存用户操作
+                                user = User.objects.create_user(username=username, password=password, phone=phone,
+                                                                email=email)
+                                if user:
+                                    # 如果注册成功，直接记住用户登录状态，跳转登录界面
+                                    login(request, user)
+                                    # 反向解析
+                                    url = reverse('account:login')
+                                    return redirect(url)
+                                else:
+                                    return render(request, 'register.html', {'msg': '注册失败'})
+                            else:
+                                return render(request, 'register.html', {'msg': '两次密码不一样或密码态短'})
+                        else:
+                            return render(request, 'register.html', {'msg': '输入正确邮箱'})
                     else:
-                        return render(request,'register.html',{'msg':'注册失败'})
+                        return render(request, 'register.html', {'msg': '输入正确的手机号'})
             else:
                 return render(request, 'register.html', {'msg': '输入信息不能为空'})
         except Exception as e:
-           return render(request,'register.html',{'msg':'注册失败'})
+           return render(request,'404.html')
     else:
         return render(request,'404.html')
 
