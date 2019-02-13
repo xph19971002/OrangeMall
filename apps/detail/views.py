@@ -34,9 +34,11 @@ def detail(request):
         shop_num = request.POST.get('shop_num')
         uid = request.user.id
         shop = Shop.objects.filter(shop_id=shop_id).first()
+        # 如果商品存在，购物车则做更新操作
         if shop:
             user = User.objects.filter(id=uid).first()
             car_shop = ShopCar.objects.filter(shop=shop_id)
+            car_status = car_shop.first().status
             if car_shop:
                 car_shop.update(number=F('number')+int(shop_num))
             else:
@@ -49,6 +51,7 @@ def detail(request):
         else:
             msg = '商品不存在或已下架！'
             result = {'status':400,'msg':msg}
+
     else:
         result = {'status':2,'msg':'不支持的请求方式！'}
 
