@@ -46,6 +46,7 @@ def detail(request):
                 car_shop = ShopCar(shop=shop, user=user, number=shop_num)
                 car_shop.save()
                 # update_number = update_number if  update_number else False
+
             # result.update(data=update_number)
             return result
         else:
