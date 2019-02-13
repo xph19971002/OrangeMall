@@ -17,7 +17,7 @@ from apps.main.models import ShopCar, Order, User
 def car_list(request):
     id = request.user.id
     # 获取用户购物车列表
-    cars = ShopCar.objects.filter(user=request.user.id,status=1)
+    cars = ShopCar.objects.filter(user=request.user.id, status=1)
     total_price = 0
     shop_num = 0
     for car in cars:
@@ -28,7 +28,7 @@ def car_list(request):
         total_price += car.sum_price
         shop_num += car.number
         car.shop_name = car.shop.name[:6]
-    return render(request,'car.html',context={'cars':cars,'total_price':total_price,'shop_num':shop_num})
+    return render(request, 'car.html', context={'cars': cars, 'total_price': total_price, 'shop_num': shop_num})
 
 
 def del_shop(request):
@@ -46,7 +46,7 @@ def del_shop(request):
 @ajax
 @login_required
 def confirm(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         car_str = request.POST.get('car')
         if car_str:
             cars = json.loads(car_str)
@@ -59,26 +59,23 @@ def confirm(request):
                     for car in cars:
                         car_id = car.get('car_id')
                         num = car.get('num')
-                        ShopCar.objects.filter(car_id=car_id).update(number=num,order_id=oid)
-                return {'oid':oid}
+                        ShopCar.objects.filter(car_id=car_id).update(number=num, order_id=oid)
+                return {'oid': oid}
             except Exception as e:
                 print(e)
                 transaction.rollback()
         else:
             pass
 
+
 # 生成订单信息
 def product_order(request):
     # 第一步生成订单号  全站必须唯一   尽量大于8位
     # user_id = request.user.id
     order_code = f"{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}{random.randint(100000,999999)}"
-    order = Order(order_code=order_code, user=request.user,address='武汉',mobile='111')
+    order = Order(order_code=order_code, user=request.user)
     if order:
         order.save()
         return order
     else:
         print('错误')
-
-
-
-
