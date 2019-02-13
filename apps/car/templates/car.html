@@ -14,7 +14,8 @@
     <script type="text/javascript">
         //点击删除
         function del(e){
-             alert($(e).text());
+             {#alert($(e).text());#}
+             alert('是否删除？');
             // 删除整个ul
             $(e).parent().parent().remove();
             //总价随着减少
