@@ -102,7 +102,7 @@ DATABASES = {
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '198.168.50.16',
+        'HOST': '192.168.50.16',
     }
 }
 
