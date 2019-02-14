@@ -194,8 +194,9 @@ class Image(models.Model):
     # 外键
     shop = models.ForeignKey(Shop, models.DO_NOTHING, db_column='shop_id', db_index=True, verbose_name=u'商品名称')
     type = models.CharField(verbose_name=u'图片类型', max_length=32, blank=True, null=True)
-    img_url = models.CharField(verbose_name=u'图片地址', max_length=255)
-    is_delete = models.BooleanField(verbose_name = u'状态', default=False)
+    img_url = models.CharField(verbose_name=u'图片名称', max_length=255)
+    is_delete = models.BooleanField(verbose_name=u'状态', default=False)
+
 
     def __str__(self):
         return self.img_id
@@ -273,7 +274,7 @@ class User(AbstractUser):
     phone = models.CharField(verbose_name=u'手机号', max_length=11, default='110')
     desc = models.CharField(max_length=255, null=True, blank=True)
     icon = models.ImageField(verbose_name=u'头像', max_length=100, upload_to='upload/img/%Y%m%d',
-                             default=u"img/default.png")
+                             default=u"user_icon_img/default.png")
     _paypasswd = models.CharField(verbose_name=u'支付密码', max_length=128)
     id_num = models.CharField(verbose_name=u'身份证号', max_length=128)
 
