@@ -197,6 +197,7 @@ class Image(models.Model):
     img_url = models.CharField(verbose_name=u'图片名称', max_length=255)
     is_delete = models.BooleanField(verbose_name=u'状态', default=False)
 
+
     def __str__(self):
         return self.img_id
 

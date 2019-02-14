@@ -48,5 +48,19 @@ def car_shop_num(request):
     # return render(request,'./common/top.html',locals())
 
 
+from haystack.views import SearchView
+from apps.main.models import Image
+
+class MySearchView(SearchView):
+    def create_response(self):
+        context = self.get_context()
+        shops = context['page']
+        for shop in shops:
+            shop.object.img_url = Image.objects.filter(shop_id=shop.object.shop_id,type='big').values('img_url').first()['img_url']
+            # shop.object.img_url = shop.image_set.img_url[0]
+        context['page'] = shops
+        return render(self.request, self.template, context)
+
+
 
 

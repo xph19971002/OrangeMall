@@ -11,7 +11,7 @@ urlpatterns = [
                   url('account/', include('account.urls', namespace='account')),
                   url('detail/', include('detail.urls')),
                   url('main/', include('main.urls')),
-                  url('search/', include('search.urls')),
+                  url(r'^search/', views.MySearchView(),name='search'),
                   url('list/', include('apps.list.urls', namespace='list')),
                   url('car/', include('car.urls')),
                   url('order/', include('order.urls')),

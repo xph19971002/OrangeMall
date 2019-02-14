@@ -17,7 +17,7 @@ def list(request):
     # cate_3 = random.sample(list(cate_3),5)
     shops = Shop.objects.all().values('name', 'original_price', 'sale', 'shop_id')
     shop_numbers = Shop.objects.all().count()
-
+    i = 0
     price = '0'
     sale_num = None
     price_sort = None
@@ -50,6 +50,7 @@ def list(request):
     for shop in shops:
         img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
         shop['img_url'] = img['img_url']
+        i +=1
 
         # 分页功能
 
@@ -78,6 +79,7 @@ def list(request):
 
 
 def sort(request):
+    cate_1 = Category.objects.filter(level=1).values('name', 'cate_id')
     cate_id = request.GET.get('cate_id')
     cate_2 = Category.objects.filter(parent_id=cate_id).values('cate_id')
     for i in cate_2:
@@ -87,10 +89,7 @@ def sort(request):
 
             i = 0
             if shops:
-                for shop in shops:
-                    img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
-                    shop['img_url'] = img['img_url']
-                    i += 1
+
                 price = '0'
                 sale_num = None
                 price_sort = None
@@ -122,6 +121,10 @@ def sort(request):
                 for shop in shops:
                     img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
                     shop['img_url'] = img['img_url']
+                    i += 1
+                # for shop in shops:
+                #     img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
+                #     shop['img_url'] = img['img_url']
                     # 分页功能
                     paginator = Paginator(shops, 20)
                     page = request.GET.get('page')

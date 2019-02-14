@@ -65,13 +65,13 @@
                 </script>
 
                 <div class="tb-booth tb-pic tb-s310">
-                    <a href="{% static 'img/big' %}/{{ imgs_first }}.jpg"><img src="{% static 'img/big' %}/{{ imgs_first }}.jpg" alt="细节展示放大镜特效" rel="{% static 'img/big' %}/{{ imgs_first }}.jpg" class="jqzoom"/></a>
+                    <a href="{% static 'img/big' %}/{{ imgs_first }}.jpg"><img class="big_img"  src="{% static 'img/big' %}/{{ imgs_first }}.jpg" alt="细节展示放大镜特效" rel="{% static 'img/big' %}/{{ imgs_first }}.jpg"></a>
                 </div>
                 <ul class="tb-thumb" id="thumblist">
                     {% for img in imgs %}
                         <li class="tb-selected">
                             <div class="tb-pic tb-s40">
-                                <a href="#"><img src="{% static 'img/small' %}/{{ img.img_url }}.jpg" mid="{% static 'img/small' %}/{{ img.img_url }}.jpg" big="{% static 'img/small' %}/{{ img.img_url }}.jpg"></a>
+                                <a href="#"><img class="small_img" src="{% static 'img/small' %}/{{ img.img_url }}.jpg" mid="{% static 'img/small' %}/{{ img.img_url }}.jpg" big="{% static 'img/big' %}/{{ img.img_url }}.jpg"></a>
                             </div>
                         </li>
                     {% endfor %}
@@ -719,7 +719,6 @@
 
 
 <script>
-
     {#点击加入购物车操作#}
     $(function () {
         $('#LikBasket').click(function () {
@@ -744,9 +743,27 @@
         });
     });
 
+    {# 购物车的数量同步更新 #}
+    $(function () {
+        $.get("{% url 'car_shop_num' %}",function(result){
+            console.log(result.data);
+            $('.cart_num').text(result.data.car_num)
+        })
+    });
+
+
     {# 鼠标覆盖小图，显示该小图对应的大图 #}
     $(function () {
+        $('.small_img').click(function () {
+            $('.big_img').attr('src',$(this).attr('big'))
+        })
+    });
 
+    {# 页面侧方鼠标覆盖js #}
+    $(function () {
+        $('.setting').mouseover(function () {
+            $('.user_info').show()
+        })
     })
 
 </script>
