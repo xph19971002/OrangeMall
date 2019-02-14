@@ -14,5 +14,6 @@ urlpatterns = [
                   url(r'^search/', views.MySearchView(),name='search'),
                   url('list/', include('apps.list.urls', namespace='list')),
                   url('car/', include('car.urls')),
-                  url('order/', include('order.urls'))
+                  url('order/', include('order.urls')),
+                  url('pay/',include('pay.urls')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

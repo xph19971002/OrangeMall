@@ -52,7 +52,8 @@ CUSTOM_APPS = [
     'apps.detail',
     'apps.list',
     'apps.car',
-    'apps.order'
+    'apps.order',
+    'apps.pay',
 ]
 
 INSTALLED_APPS = SYS_APPS + EXT_APPS + CUSTOM_APPS
@@ -148,6 +149,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'apps/search/static'),
     os.path.join(BASE_DIR, 'apps/account/static'),
     os.path.join(BASE_DIR, 'apps/car/static'),
+    os.path.join(BASE_DIR,'apps/pay/static'),
 )
 
 # 指定自定义用户模型所在的位置
@@ -258,13 +260,12 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE  = 8
 # ----------------------------------------------------------------------
 
 # 支付宝注册应用生成的id
-# APP_ID = '2016092300577618'
-#
+APP_ID = '2016092400583559'
 # 测试环境下支付网关
-# PAY_URL_DEV = 'https://openapi.alipaydev.com/gateway.do'
+PAY_URL_DEV = 'https://openapi.alipaydev.com/gateway.do?'
 # 正式开发环境下支付网关
-# PAY_URL = 'https://openapi.alipay.com/gateway.do'
+PAY_URL = 'https://openapi.alipay.com/gateway.do'
 # 配置私钥
-# APP_PRIVATE_KEY_STR = open(os.path.join(BASE_DIR,'pay/app_private_key.pem')).read()
+APP_PRIVATE_KEY_STR = open(os.path.join(BASE_DIR,'app_private_key.pem')).read()
 # 配置公钥
-# APP_PUBLIC_KEY_STR =open(os.path.join(BASE_DIR,'pay/app_public_key.pem')).read()
+APP_PUBLIC_KEY_STR =open(os.path.join(BASE_DIR,'app_public_key.pem')).read()

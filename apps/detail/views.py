@@ -34,23 +34,28 @@ def detail(request):
         shop_num = request.POST.get('shop_num')
         uid = request.user.id
         shop = Shop.objects.filter(shop_id=shop_id).first()
-        if shop:
-            user = User.objects.filter(id=uid).first()
-            car_shop = ShopCar.objects.filter(shop=shop_id)
-            if car_shop:
-                car_shop.update(number=F('number')+int(shop_num))
-            else:
-                update_number = 1
-                car_shop = ShopCar(shop=shop, user=user, number=shop_num)
-                car_shop.save()
-                # update_number = update_number if  update_number else False
-            # result.update(data=update_number)
-            return result
+
+        user = User.objects.filter(id=uid).first()
+        car_shops = ShopCar.objects.filter(shop=shop_id,status=1,user=request.user.id)
+        if car_shops.exists() :
+            car_shops.update(number=F('number') + int(shop_num))
         else:
-            msg = '商品不存在或已下架！'
-            result = {'status':400,'msg':msg}
+            car_shop = ShopCar(shop=shop, user=user, number=shop_num)
+            car_shop.save()
+        return result
+
+        # if car_shop and car_shop.first().status==1:
+        #     car_shop.update(number=F('number')+int(shop_num))
+        # else:
+        #     car_shop = ShopCar(shop=shop, user=user, number=shop_num)
+        #     car_shop.save()
+        #     # update_number = update_number if  update_number else False
+        # # result.update(data=update_number)
+        # return result
     else:
-        result = {'status':2,'msg':'不支持的请求方式！'}
+        msg = '商品不存在或已下架！'
+        result = {'status':400,'msg':msg}
+
 
 
 
