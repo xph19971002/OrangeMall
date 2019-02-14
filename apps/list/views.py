@@ -17,7 +17,7 @@ def list(request):
     # cate_3 = random.sample(list(cate_3),5)
     shops = Shop.objects.all().values('name', 'original_price', 'sale', 'shop_id')
     shop_numbers = Shop.objects.all().count()
-
+    i = 0
     price = '0'
     sale_num = None
     price_sort = None
@@ -50,6 +50,7 @@ def list(request):
     for shop in shops:
         img = Image.objects.filter(shop_id=shop.get('shop_id')).values('img_url').first()
         shop['img_url'] = img['img_url']
+        i +=1
 
         # 分页功能
 
