@@ -3,9 +3,12 @@ from django.contrib.auth.decorators import  login_required
 from django.contrib.auth import logout, login ,authenticate
 from django.db.models import Q
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from apps.main.models import User
 from django.contrib.auth.hashers import check_password
+from django.template import loader
+from apps.account.tasks import send_active_mail
 
 #登录
 def login_view(request):
@@ -69,13 +72,20 @@ def register(request):
                             if password == pwdRepeat and len(password) > 5:
                                 # 保存用户操作
                                 user = User.objects.create_user(username=username, password=password, phone=phone,
-                                                                email=email)
+                                                                email=email,is_active=0)
                                 if user:
                                     # 如果注册成功，直接记住用户登录状态，跳转登录界面
-                                    login(request, user)
-                                    # 反向解析
-                                    url = reverse('account:login')
-                                    return redirect(url)
+                                    # login(request, user)
+                                    # # 反向解析
+                                    # url = reverse('account:login')
+                                    # return redirect(url)
+                                    active_url = f"http://127.0.0.1:8000/account/active/?uid={user.id}"
+                                    content = loader.render_to_string('mail.html',
+                                                                      request=request,
+                                                                      context={'username':username,
+                                                                               'active_url':active_url})
+                                    send_active_mail.delay(subject='甜橙项目激活邮件', content=content, to=['15565608583@163.com'])
+                                    return render(request, 'msg.html')
                                 else:
                                     return render(request, 'register.html', {'msg': '注册失败'})
                             else:
@@ -105,3 +115,9 @@ def update(request):
 
 def detall(request):
     pass
+
+
+def active_account(request):
+    uid = request.GET.get('uid')
+    User.objects.filter(id=uid).update(is_active=1)
+    return redirect('/account/login')
