@@ -78,6 +78,7 @@ def list(request):
 
 
 def sort(request):
+    cate_1 = Category.objects.filter(level=1).values('name', 'cate_id')
     cate_id = request.GET.get('cate_id')
     cate_2 = Category.objects.filter(parent_id=cate_id).values('cate_id')
     for i in cate_2:
