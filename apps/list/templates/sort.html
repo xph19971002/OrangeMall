@@ -217,11 +217,11 @@
                                     <dl id="select2">
                                         <dt class="am-badge am-round">价格区间</dt>
                                             <div class="dd-conent">
-                                                <dd class="select-all selected"><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=0&sale_num={{ sale_num }}&price_sort={{ price_sort }}">全部</a></dd>
-                                                <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=1&sale_num={{ sale_num }}&price_sort={{ price_sort }}">0~100</a></dd>
-                                                <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=2&sale_num={{ sale_num }}&price_sort={{ price_sort }}">100~200</a></dd>
-                                                <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=3&sale_num={{ sale_num }}&price_sort={{ price_sort }}">200~500</a></dd>
-                                                <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=4&sale_num={{ sale_num }}&price_sort={{ price_sort }}">500+</a></dd>
+                                                <dd class="select-all selected"><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&cate_id={{ cate_id }}&price=0&sale_num={{ sale_num }}&price_sort={{ price_sort }}">全部</a></dd>
+                                                <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&cate_id={{ cate_id }}&price=1&sale_num={{ sale_num }}&price_sort={{ price_sort }}">0~100</a></dd>
+                                                <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&cate_id={{ cate_id }}&price=2&sale_num={{ sale_num }}&price_sort={{ price_sort }}">100~200</a></dd>
+                                                <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&cate_id={{ cate_id }}&price=3&sale_num={{ sale_num }}&price_sort={{ price_sort }}">200~500</a></dd>
+                                                <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&cate_id={{ cate_id }}&price=4&sale_num={{ sale_num }}&price_sort={{ price_sort }}">500+</a></dd>
                                             </div>
                                     </dl>
 								</li>
@@ -230,12 +230,12 @@
                         </div>
 							<div class="search-content">
 								<div class="sort">
-									<li class="first"><a title="综合" href="{% url 'list:sort' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=None&price_sort=None">综合排序</a></li>
-									<li><a title="销量" href="{% url 'list:sort' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=1&price_sort=None">销量排序（降序）</a></li>
-                                    <li><a title="销量" href="{% url 'list:sort' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=2&price_sort=None">销量排序（升序）</a></li>
+									<li class="first"><a title="综合" href="{% url 'list:sort' %}?page={{ shop_list.number }}&cate_id={{ cate_id }}&price={{ price }}&sale_num=None&price_sort=None">综合排序</a></li>
+									<li><a title="销量" href="{% url 'list:sort' %}?page={{ shop_list.number }}&cate_id={{ cate_id }}&price={{ price }}&sale_num=1&price_sort=None">销量排序（降序）</a></li>
+                                    <li><a title="销量" href="{% url 'list:sort' %}?page={{ shop_list.number }}&cate_id={{ cate_id }}&price={{ price }}&sale_num=2&price_sort=None">销量排序（升序）</a></li>
 
-                                    <li><a title="价格" href="{% url 'list:sort' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=None&price_sort=1">价格优先（降序）</a></li>
-                                    <li><a title="价格" href="{% url 'list:sort' %}?page={{ shop_list.number }}&price={{ price }}&sale_num=None&price_sort=2">价格优先（升序）</a></li>
+                                    <li><a title="价格" href="{% url 'list:sort' %}?page={{ shop_list.number }}&cate_id={{ cate_id }}&price={{ price }}&sale_num=None&price_sort=1">价格优先（降序）</a></li>
+                                    <li><a title="价格" href="{% url 'list:sort' %}?page={{ shop_list.number }}&cate_id={{ cate_id }}&price={{ price }}&sale_num=None&price_sort=2">价格优先（升序）</a></li>
 								</div>
 								<div class="clear"></div>
 
@@ -265,15 +265,15 @@
 
     <ul class="am-pagination am-pagination-right">
                     {% if shops_page.has_previous  %}
-                        <li ><a  href="?page={{ shop_list.previous_page_number }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">&laquo;上一页</a></li>
+                        <li ><a  href="?page={{ shop_list.previous_page_number }}&cate_id={{ cate_id }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">&laquo;上一页</a></li>
                     {% else %}
                         <li class="am-disabled"><a>&laquo;上一页</a></li>
                     {% endif %}
                     {% for pindex in pages %}
-                        <li {% if pindex == shop_list.number %}class="am-active"{% endif %}><a href="?page={{  pindex }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}" >{{ pindex }}</a></li>
+                        <li {% if pindex == shop_list.number %}class="am-active"{% endif %}><a href="?page={{  pindex }}&cate_id={{ cate_id }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}" >{{ pindex }}</a></li>
                     {% endfor %}
                     {% if goods_page.has_next %}
-                        <li><a href="?page={{ shop_list.next_page_number }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">下一页&raquo;</a></li>
+                        <li><a href="?page={{ shop_list.next_page_number }}&cate_id={{ cate_id }}&price={{ price }}&sale_num={{ sale_num }}&price_sort={{ price_sort }}">下一页&raquo;</a></li>
                     {% else %}
                         <li class="am-disabled"><a>下一页&raquo;</a></li>
                     {% endif %}
