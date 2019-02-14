@@ -155,6 +155,24 @@ def sort(request):
 
 
 def person_show(request):
-    uid = request.GET.get('uid')
-    user = User.objects.get(id=uid)
-    return render(request,'person_info.html',locals())
+    if request.method == 'GET':
+        uid = request.GET.get('uid')
+        user = User.objects.get(id=uid)
+        return render(request,'person_info.html',locals())
+
+    elif request.method == 'POST':
+        try:
+            uid = request.GET.get('uid')
+            user = User.objects.get(id=uid)
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            phone = request.POST.get('phone')
+            email = request.POST.get('email')
+            user.first_name = first_name
+            user.last_name = last_name
+            user.phone = phone
+            user.email = email
+            user.save()
+            return render(request,'person_info.html',locals())
+        except Exception as e:
+           return render(request,'404.html')

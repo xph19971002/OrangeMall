@@ -51,12 +51,13 @@
 
                         <!--个人信息 -->
                         <div class="info-main">
-                            <form class="am-form am-form-horizontal">
+                            <form class="am-form am-form-horizontal" method="post">
+                                {% csrf_token %}
 
                                 <div class="am-form-group">
                                     <label for="user-name2" class="am-form-label">昵称</label>
                                     <div class="am-form-content">
-                                        <input type="text" id="user-name2" placeholder="{{ user.username }}" >
+                                        <input type="text" id="user-name2" name = 'first_name' placeholder="{{ user.username }}" >
                                           <small>昵称长度不能超过40个汉字</small>
                                     </div>
                                 </div>
@@ -64,7 +65,7 @@
                                 <div class="am-form-group">
                                     <label for="user-name" class="am-form-label">姓名</label>
                                     <div class="am-form-content">
-                                        <input type="text" id="user-name2" placeholder="{{ user.username }}">
+                                        <input type="text" id="user-name2" name = 'last_name' placeholder="{{ user.username }}">
 
                                     </div>
                                 </div>
@@ -112,14 +113,14 @@
                                 <div class="am-form-group">
                                     <label for="user-phone" class="am-form-label">电话</label>
                                     <div class="am-form-content">
-                                        <input id="user-phone" placeholder="{{ user.phone }}" type="tel">
+                                        <input id="user-phone" name = 'phone' placeholder="{{ user.phone }}" type="tel">
 
                                     </div>
                                 </div>
                                 <div class="am-form-group">
                                     <label for="user-email" class="am-form-label">电子邮件</label>
                                     <div class="am-form-content">
-                                        <input id="user-email" placeholder="{{ user.email }}" type="email">
+                                        <input id="user-email" name = 'email' placeholder="{{ user.email }}" type="email">
 
                                     </div>
                                 </div>
@@ -150,7 +151,8 @@
                                     </div>
                                 </div>
                                 <div class="info-btn">
-                                    <div class="am-btn am-btn-danger">保存修改</div>
+                                    <input type="submit" name="" value="保存修改" class="am-btn am-btn-danger">
+{#                                    <div class="am-btn am-btn-danger">保存修改</div>#}
                                 </div>
 
                             </form>
