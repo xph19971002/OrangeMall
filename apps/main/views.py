@@ -10,8 +10,8 @@ def index(request):
     for hot_shop in hot_list:
         hot_shop.image = hot_shop.image_set.filter(type='big').first()
     cate_list = Category.objects.filter(level=1)
-    shop_car_queryset = ShopCar.objects.filter(shop_id=request.user.id)
-    shop_car_num = shop_car_queryset.count() if shop_car_queryset.exists() else 0
+    # shop_car_queryset = ShopCar.objects.filter(shop_id=request.user.id)
+    # shop_car_num = shop_car_queryset.count() if shop_car_queryset.exists() else 0
     for cate in cate_list:
         sub_menus = Category.objects.filter(parent_id=cate.cate_id, level=2)
         for sub_menu in sub_menus:
