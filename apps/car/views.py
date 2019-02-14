@@ -15,20 +15,31 @@ from apps.main.models import ShopCar, Order, User
 
 @login_required
 def car_list(request):
-    id = request.user.id
-    # 获取用户购物车列表
-    cars = ShopCar.objects.filter(user=request.user.id, status=1)
-    total_price = 0
-    shop_num = 0
-    for car in cars:
-        # 商品图片
-        car.image = car.shop.image_set.filter(shop_id=car.shop.shop_id).first()
-        # 商品总价
-        car.sum_price = float(car.shop.promote_price) * car.number
-        total_price += car.sum_price
-        shop_num += car.number
-        car.shop_name = car.shop.name[:6]
-    return render(request, 'car.html', context={'cars': cars, 'total_price': total_price, 'shop_num': shop_num})
+    if request.method=='GET':
+        order_code = request.GET.get('order_code')
+        if order_code:
+            order = Order.objects.filter(order_code=order_code)
+            if order:
+                order.update(status=0)
+            car_shops = ShopCar.objects.filter(order=order.first().oid).all()
+            for car_shop in car_shops:
+                car_shop.status=0
+                car_shop.save()
+
+        id = request.user.id
+        # 获取用户购物车列表
+        cars = ShopCar.objects.filter(user=request.user.id, status=1)
+        total_price = 0
+        shop_num = 0
+        for car in cars:
+            # 商品图片
+            car.image = car.shop.image_set.filter(shop_id=car.shop.shop_id).first()
+            # 商品总价
+            car.sum_price = float(car.shop.promote_price) * car.number
+            total_price += car.sum_price
+            shop_num += car.number
+            car.shop_name = car.shop.name[:6]
+        return render(request, 'car.html', context={'cars': cars, 'total_price': total_price, 'shop_num': shop_num})
 
 
 def del_shop(request):
