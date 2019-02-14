@@ -226,12 +226,24 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE  = 8
 # ----------------------------------------------------------------------
 #                               邮件配置
 # ----------------------------------------------------------------------
+# 传递消息时使用的redis 的ip 端口 数据库名
+BROKER_URL = 'redis://127.0.0.1:6379/2'
 
-# EMAIL_HOST = 'smtp.163.com'
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = True
+# 发送邮件的服务器地址
+EMAIL_HOST = 'smtp.163.com'
+# 发送邮件端口
+EMAIL_PORT = 25
+# 发送邮件默认的名称
+EMAIL_HOST_USER = '15565608583@163.com'
+# 授权码
+EMAIL_HOST_PASSWORD = 'madl111'
+# 是否启用tls安全协议
+EMAIL_USE_TLS = True
+
+# 是否启用SSL安全协议
+# EMAIL_USE_SSL = True
+# 发送超时时间
+# EMAIL_TIMEOUT =
 
 
 # ----------------------------------------------------------------------
