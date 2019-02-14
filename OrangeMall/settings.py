@@ -41,13 +41,14 @@ EXT_APPS = [
     'crispy_forms',
     'xadmin',
     'reversion',
+    'haystack',
 ]
 
 # 自定义功能模块
 CUSTOM_APPS = [
+
     'apps.main',
     'apps.account',
-    'apps.search',
     'apps.detail',
     'apps.list',
     'apps.car',
@@ -163,6 +164,23 @@ LOGIN_URL = '/account/login/'
 MEDIA_URL = '/media/'
 # 上传文件的根路径， 字符类型
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# =================全文检索框架配置 start=============
+# 搜索引擎
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        # 使用whoosh引擎
+        'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+        # 索引文件路径
+        'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+    }
+}
+# 当添加、修改、删除数据时，自动生成索引
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+# 搜索框架
+#设置每页显示的数目，默认为12，可以自己修改
+HAYSTACK_SEARCH_RESULTS_PER_PAGE  = 8
+# =================全文检索框架配置 end=============
 
 # ----------------------------------------------------------------------
 #                               缓存的配置
