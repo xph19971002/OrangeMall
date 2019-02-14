@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-from apps.main.models import Shop, Image, Category
+from apps.main.models import Shop, Image, Category,User
 
 
 def list(request):
@@ -154,3 +154,7 @@ def sort(request):
                 return render(request,'list.html',locals())
 
 
+def person_show(request):
+    uid = request.GET.get('uid')
+    user = User.objects.get(id=uid)
+    return render(request,'person_info.html',locals())
