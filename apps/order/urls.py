@@ -7,5 +7,10 @@ from apps.order import views
 
 
 urlpatterns = [
-    url('form/',views.confirm1),
+    url('payment/',views.payment,name='payment'),
+    url('setdefault/',views.setdefault,name='setdefault'),
+    url('deladdr/',views.deladdr,name='deladdr'),
+    url('add_addr/',views.add_addr,name='add_addr'),
+    url('select/',views.select_addr,name='select'),
+    url('selcity/',views.select_city,name='selcity')
 ]

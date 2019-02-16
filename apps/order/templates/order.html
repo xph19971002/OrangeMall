@@ -1,0 +1,114 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block page_title %}
+    结算页面
+{% endblock %}
+
+{% block page_css %}
+    <link href="{% static 'assets/css/amazeui.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/base/demo.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/hmstyle.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/car.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link href="{% static 'css/jsstyle.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block page_js %}
+    <script src="{% static 'js/car.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            let total_price = $('#total').find('em').text();
+            $('#reality_pay').find('em').text(total_price)
+        });
+        $(function () {
+            $('.new-addr-btn').each(function () {
+                $(this).find('.set_default').click(function () {
+                    $('.set_default').removeClass("hidden");
+                    $('.new-addr-btn span').removeClass("hidden");
+                    $(this).addClass("hidden");
+                    $(this).next('span').addClass("hidden")
+                    var aid = $(this).attr('aid');
+                    var data = {
+                        aid:aid
+                    };
+                    $.get("{%url 'setdefault'%}",data,function(result){
+                        if (result.status===200){
+                        }
+                    })
+                })
+            })
+        });
+        $(function () {
+            $('.del_addr').click(function () {
+                 alert('是否删除？');
+                // 删除整个li
+                $(this).parent().parent().remove();
+                var aid = $(this).attr('aid');
+                var data = {
+                        aid:aid
+                    };
+                $.get("{% url 'deladdr' %}",data, function(result){
+                    if (result.status===200){
+
+                    }
+                })
+            })
+        });
+        $(function () {
+            {#更改省份后的操作#}
+            $("select[name='province']").change(function(){
+                var province = $(this).find('option:selected').text();
+                data = {
+                    province:province
+                };
+                $.get("{% url 'select' %}",data,function(result){
+                    if (result.status===200){
+                        // 先清空城市下拉框
+			            $("select[name='city']").empty();
+			            var content = result.content;
+			            var citys = content.citys;
+			            $.each(citys, function(i, d) {
+                            $("select[name='city']").append(
+                                    "<option value='"+d+"'>" + d
+                                            + "</option>");});
+                    }
+                })
+            })
+        });
+        $(function () {
+            {#更改城市后的操作#}
+            $("select[name='city']").change(function(){
+                var city = $(this).find('option:selected').text();
+                data = {
+                    city:city
+                };
+                $.get("{% url 'selcity' %}",data,function(result){
+                    if (result.status===200){
+                        // 先清空城市下拉框
+			            $("select[name='dist']").empty();
+			            var content = result.content;
+			            var dists = content.dists;
+			            $.each(dists, function(i, d) {
+                            $("select[name='dist']").append(
+                                    "<option value='"+d+"'>" + d
+                                            + "</option>");});
+                    }
+                })
+            })
+        })
+
+    </script>
+    <script src="{% static 'js/order.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block page_head %}
+    {% include 'common/top.html' %}
+    {% include 'common/search/search.html'%}
+{% endblock %}
+
+{% block page_main %}
+    {% include 'include/main.html' %}
+{% endblock %}
+
+{% block page_footer %}
+{% endblock %}
