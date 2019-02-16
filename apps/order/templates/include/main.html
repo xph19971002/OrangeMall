@@ -161,39 +161,41 @@
     </div>
     <hr/>
     <div class="am-u-md-12">
-        <form class="am-form am-form-horizontal" method="post" action="{% url 'add_addr' %}">
-
-            <div class="am-form-group">
+        <form class="am-form am-form-horizontal">
+            {% csrf_token %}
+            <div class="am-form-group" id="receive_person">
                 <label for="user-name" class="am-form-label">收货人</label>
                 <div class="am-form-content">
-                    <input type="text" id="user-name" placeholder="收货人" name="receive_person">
+                    <input type="text" id="user-name" placeholder="收货人" >
                 </div>
             </div>
 
-            <div class="am-form-group">
+            <div class="am-form-group" id="receive_phone">
                 <label for="user-phone" class="am-form-label">手机号码</label>
                 <div class="am-form-content">
-                    <input id="user-phone" placeholder="手机号必填" type="email" name="receive_phone">
+                    <input id="user-phone" placeholder="手机号必填" type="email">
                 </div>
             </div>
 
             <div class="am-form-group" id="receive_loc">
                 <label for="user-phone" class="am-form-label">所在地</label>
                 <div class="am-form-content address">
-                    <select data-am-selected name="province">
+                    <select data-am-selected name="province" id="receive_province">
                         {% for province in provinces %}
                             <option >{{ province.name }}</option>
                         {% endfor %}
                     </select>
-                    <select data-am-selected name="city">
-                        {% for city in citys %}
-                            <option >{{ city.name }}</option>
-                        {% endfor %}
+                    <select data-am-selected name="city" id="receive_city">
+                        <option >{{ city.name }}</option>
+{#                        {% for city in citys %}#}
+{#                            <option >{{ city.name }}</option>#}
+{#                        {% endfor %}#}
                     </select>
-                    <select data-am-selected name="dist">
-                        {% for area in areas %}
-                            <option >{{ area.name }}</option>
-                        {% endfor %}
+                    <select data-am-selected name="dist" id="receive_dist">
+                        <option >{{ city.name }}</option>
+{#                        {% for area in areas %}#}
+{#                            <option >{{ area.name }}</option>#}
+{#                        {% endfor %}#}
                     </select>
                 </div>
             </div>
@@ -208,7 +210,7 @@
 
             <div class="am-form-group theme-poptit">
                 <div class="am-u-sm-9 am-u-sm-push-3">
-                    <div class="am-btn am-btn-danger">保存</div>
+                    <div class="am-btn am-btn-danger" id="receive_save">保存</div>
                     <div class="am-btn am-btn-danger close">取消</div>
                 </div>
             </div>

@@ -103,9 +103,24 @@ def deladdr(request):
     else:
         return HttpResponse('不支持的请求方式')
 
+@ajax
 def add_addr(request):
     if request.method=='POST':
-        pass
+        reciver = request.POST.get('name')
+        phone = request.POST.get('phone')
+        province = request.POST.get('province')
+        city = request.POST.get('city')
+        area = request.POST.get('dist')
+        detail_loc = request.POST.get('detail')
+        if reciver and phone and province and city and area and detail_loc:
+            address = Address(reciver=reciver,phone=phone,province=province,city=city,area=area,detail_loc=detail_loc,status=0,is_detele=False,user=request.user)
+            address.save()
+            return {'msg':'OK'}
+        else:
+            return {'msg':'error'}
+    else:
+        return HttpResponse('不支持的请求方式')
+
 
 
 

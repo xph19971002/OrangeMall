@@ -344,6 +344,8 @@ class Collect(models.Model):
 # 用户地址表
 class Address(models.Model):
     aid = models.AutoField(primary_key=True, verbose_name='地址ID')
+    reciver = models.CharField(max_length=64,verbose_name='收件人')
+    phone = models.CharField(max_length=20, verbose_name='收件人号码')
     province = models.CharField(max_length=64, verbose_name='省')
     city = models.CharField(max_length=64, verbose_name='市')
     area = models.CharField(max_length=64,verbose_name='区')

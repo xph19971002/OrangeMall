@@ -95,6 +95,39 @@
                     }
                 })
             })
+        });
+        $(function () {
+            $('#receive_save').click(function () {
+                var name = $('#receive_person').find('input').val();
+                var phone = $('#receive_phone').find('input').val();
+                var province = $('#receive_province option:selected').text();
+                var city =  $('#receive_city option:selected').text();
+                var dist =  $('#receive_dist option:selected').text();
+                var detail = $('#receive_detail').find('textarea').val();
+                data = {
+                    name:name,
+                    phone:phone,
+                    province:province,
+                    city:city,
+                    dist:dist,
+                    detail:detail,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                };
+                $.post("{% url 'add_addr' %}",data,function(result){
+                    if (result.status===200){
+                        $('.theme-popover-mask').hide();
+                        $('.theme-popover').slideUp(200);
+                        if (result.content.msg==='OK'){
+                            alert('保存成功！！')
+                        }else {
+                            alert('保存失败！！')
+                        }
+
+                    }
+
+                })
+            })
+
         })
 
     </script>
