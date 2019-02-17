@@ -8,14 +8,14 @@
                 <div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
             </div>
             <div class="clear"></div>
-            <ul>
+            <ul id="loc_info">
                 <div class="per-border"></div>
-                <li class="user-addresslist defaultAddr" id="first_addr">
+                <li class="user-addresslist defaultAddr" id="first_addr" aid="{{ defaultaddr.aid }}">
                     <div class="address-left">
                         <div class="user DefaultAddr">
                             <span class="buy-address-detail">
-                                <span class="buy-user">{{ user.username }}</span>
-                                <span class="buy-phone">{{ user.phone }}</span>
+                                <span class="buy-user">{{ defaultaddr.reciver }}</span>
+                                <span class="buy-phone">{{ defaultaddr.phone }}</span>
                             </span>
                         </div>
                         <div class="default-address DefaultAddr">
@@ -43,12 +43,12 @@
                 </li>
                 {% for addr in address %}
                     <div class="per-border"></div>
-                        <li class="user-addresslist">
+                    <li class="user-addresslist" aid="{{ addr.aid }}">
                             <div class="address-left">
                                 <div class="user DefaultAddr">
                                     <span class="buy-address-detail">
-                                        <span class="buy-user">{{ user.username }}</span>
-                                        <span class="buy-phone">{{ user.phone }}</span>
+                                        <span class="buy-user">{{ addr.reciver }}</span>
+                                        <span class="buy-phone">{{ addr.phone }}</span>
                                     </span>
                                 </div>
                                 <div class="default-address DefaultAddr">
@@ -117,7 +117,7 @@
                                 <em class="t">实付款：</em>
                                 <span class="price g_price " id="reality_pay">
                                     <span>¥</span>
-                                    <em class="style-large-bold-red " id="J_ActualFee">244.00</em>
+                                    <em class="style-large-bold-red " id="J_ActualFee"></em>
                                 </span>
                             </div>
                             <div id="holyshit268" class="pay-address">
@@ -142,7 +142,7 @@
 
                         <div id="holyshit269" class="submitOrder">
                             <div class="go-btn-wrap">
-                                <a id="J_Go" href="success.html" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+                                <a id="J_Go" href="javascript:void(0);" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
                             </div>
                         </div>
                         <div class="clear"></div>

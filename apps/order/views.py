@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django_ajax.decorators import ajax
 
-from apps.main.models import ShopCar, Address, Area
+from apps.main.models import ShopCar, Address, Area, Order
 
 
 @login_required
@@ -36,8 +36,8 @@ def payment(request):
         car.shop_name = car.shop.name[:6]
     # 获取所有地区的省级名称
     provinces = Area.objects.filter(level=1)
-    citys = Area.objects.filter(level=2)
-    areas = Area.objects.filter(level=3)
+    # citys = Area.objects.filter(level=2)
+    # areas = Area.objects.filter(level=3)
     return render(request, 'order.html', locals())
 
 
@@ -115,11 +115,27 @@ def add_addr(request):
         if reciver and phone and province and city and area and detail_loc:
             address = Address(reciver=reciver,phone=phone,province=province,city=city,area=area,detail_loc=detail_loc,status=0,is_detele=False,user=request.user)
             address.save()
-            return {'msg':'OK'}
+            return {'msg':'OK','reciver':reciver,'phone':phone,'province':province,'city':city,'dist':area,'street':detail_loc,'aid':address.aid}
         else:
             return {'msg':'error'}
     else:
         return HttpResponse('不支持的请求方式')
+
+def pay_success(request):
+    if request.method == 'GET':
+        order_code = request.GET.get('order_code')
+        aid = request.GET.get('aid')
+        address = Address.objects.filter(aid=aid).first()
+        amount = request.GET.get('total')
+        if order_code:
+            order = Order.objects.filter(order_code=order_code)
+            if order:
+                order.update(status=0)
+            car_shops = ShopCar.objects.filter(order=order.first().oid).all()
+            for car_shop in car_shops:
+                car_shop.status = 0
+                car_shop.save()
+    return render(request,'pay_success.html',locals())
 
 
 

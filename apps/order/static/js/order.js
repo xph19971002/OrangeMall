@@ -1,6 +1,9 @@
 $(function () {
     let $first_addr = $('#first_addr');
     let $holyshit268 = $('#holyshit268');
+    let $holyshit269 = $('#holyshit269');
+    let aid = $first_addr.attr('aid');
+    $holyshit269.attr('aid',aid);
     let province = $first_addr.find('.province').text();
     let city = $first_addr.find('.city').text();
     let dist = $first_addr.find('.dist').text();
@@ -20,6 +23,9 @@ $(function() {
         $(this).addClass("defaultAddr").siblings().removeClass("defaultAddr");
         let $defaultAddr = $('.defaultAddr');
         let $holyshit268 = $('#holyshit268');
+        let $holyshit269 = $('#holyshit269');
+        let aid = $defaultAddr.attr('aid');
+        $holyshit269.attr('aid',aid);
         let province = $defaultAddr.find('.province').text();
         let city = $defaultAddr.find('.city').text();
         let dist = $defaultAddr.find('.dist').text();
@@ -76,5 +82,18 @@ $(document).ready(function($) {
     })
 });
 
+
+//点击提交订单
+$(function () {
+    $('#J_Go').click(function () {
+        var aid = $('#holyshit269').attr('aid');
+        var total = $('#J_ActualFee').text();
+        //获取当前网页url跟在问号后面的部分。？oid=1&k=8
+        var oid = window.location.search;
+        var num = oid.indexOf("=");
+        var id = oid.substring(num+1);
+        window.location.href = '/pay/pay/?oid=' + id + '&total='+total+'&aid='+aid
+    })
+});
 
 

@@ -16,16 +16,6 @@ from apps.main.models import ShopCar, Order, User
 @login_required
 def car_list(request):
     if request.method=='GET':
-        order_code = request.GET.get('order_code')
-        if order_code:
-            order = Order.objects.filter(order_code=order_code)
-            if order:
-                order.update(status=0)
-            car_shops = ShopCar.objects.filter(order=order.first().oid).all()
-            for car_shop in car_shops:
-                car_shop.status=0
-                car_shop.save()
-
         id = request.user.id
         # 获取用户购物车列表
         cars = ShopCar.objects.filter(user=request.user.id, status=1)

@@ -12,5 +12,6 @@ urlpatterns = [
     url('deladdr/',views.deladdr,name='deladdr'),
     url('add_addr/',views.add_addr,name='add_addr'),
     url('select/',views.select_addr,name='select'),
-    url('selcity/',views.select_city,name='selcity')
+    url('selcity/',views.select_city,name='selcity'),
+    url('success/',views.pay_success,name='pay_sucess')
 ]
