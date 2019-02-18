@@ -54,6 +54,7 @@ CUSTOM_APPS = [
     'apps.car',
     'apps.order',
     'apps.pay',
+    'apps.person',
 ]
 
 INSTALLED_APPS = SYS_APPS + EXT_APPS + CUSTOM_APPS
@@ -102,7 +103,7 @@ DATABASES = {
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '192.168.50.16',
+        'HOST': '127.0.0.1',
     }
 }
 

@@ -7,7 +7,7 @@ __author__ = 'peiming'
 __date__ = '2019/1/24 0024 20:33'
 
 urlpatterns = [
-    url(r'sort/', views.sort, name='sort'),
-    url('^$', views.list, name='list'),
-    url(r'person/',views.person_show,name='person')
+    url('sort/', views.sort, name='sort'),
+    url('all/', views.list_all, name='all'),
+
 ]

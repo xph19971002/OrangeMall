@@ -17,7 +17,7 @@
             <div class="menu-hd"><a href="{% url 'index' %}" target="_top" class="h">商城首页</a></div>
         </div>
         <div class="topMessage my-shangcheng">
-            <div class="menu-hd MyShangcheng"><a  target="_top" href="{% url 'list:person'%}?uid={{ user.id }} "><i class="am-icon-user am-icon-fw"></i>个人中心</a>
+            <div class="menu-hd MyShangcheng"><a  target="_top" href="{% url 'person:information'%}?uid={{ user.id }} "><i class="am-icon-user am-icon-fw"></i>个人中心</a>
             </div>
         </div>
         <div class="topMessage mini-cart">
