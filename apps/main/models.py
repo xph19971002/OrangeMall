@@ -343,16 +343,48 @@ class Collect(models.Model):
 
 # 用户地址表
 class Address(models.Model):
-    aid = models.AutoField(primary_key=True, verbose_name=u'地址ID')
-    province = models.CharField(max_length=64, verbose_name=u'省')
-    city = models.CharField(max_length=64, verbose_name=u'市')
-    detail_loc = models.CharField(max_length=255, null=False, verbose_name=u'详细地址')
+    aid = models.AutoField(primary_key=True, verbose_name='地址ID')
+    reciver = models.CharField(max_length=64,verbose_name='收件人')
+    phone = models.CharField(max_length=20, verbose_name='收件人号码')
+    province = models.CharField(max_length=64, verbose_name='省')
+    city = models.CharField(max_length=64, verbose_name='市')
+    area = models.CharField(max_length=64,verbose_name='区')
+    detail_loc = models.CharField(max_length=255, null=False, verbose_name='详细地址')
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, db_column='uid', db_index=True,
-                             verbose_name=u"用户ID")
-    create_date = models.DateTimeField(verbose_name=u'创建时间', auto_now_add=True)
+                             verbose_name="用户ID")
+    create_date = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    # 0正常地址  1默认地址
+    status = models.IntegerField(default=0)
     is_detele = models.BooleanField()
 
     class Meta:
         db_table = 'address'
         verbose_name = u'用户地址'
         verbose_name_plural = verbose_name
+
+# 地区表
+class Area(models.Model):
+    aid = models.AutoField(primary_key=True, verbose_name='地址ID')
+    # 当前类别所属父id
+    parent_id = models.IntegerField(verbose_name=u'父ID')
+    short_name = models.CharField(verbose_name='地区简称',max_length=64)
+    name = models.CharField(verbose_name='地区名', max_length=64)
+    merger_name = models.CharField(verbose_name='全称', max_length=64)
+    # 分类级别1/2/3   1代表一级菜单 2代表二级菜单 3代表三级菜单
+    level = models.CharField(verbose_name=u'分类级别',max_length=64)
+    pinyin = models.CharField(verbose_name='地区拼音',max_length=64)
+    code = models.CharField(verbose_name='地区编号',max_length=64)
+    zip_code = models.CharField(max_length=64)
+    first = models.CharField(verbose_name='首字母',max_length=64)
+    lng = models.CharField(verbose_name='经度',max_length=64)
+    lat = models.CharField(verbose_name='维度',max_length=64)
+    status = models.IntegerField(verbose_name=u'状态', default=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'Area'
+        verbose_name = u'地区信息'
+        verbose_name_plural = u'地区信息'
+
