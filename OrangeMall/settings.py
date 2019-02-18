@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'OrangeMall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_shopping',
+        'NAME': 'omdb',
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
