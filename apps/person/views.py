@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # Create your views here.
-from main.models import User
+from apps.main.models import User
 
 def index(request):
     pass
