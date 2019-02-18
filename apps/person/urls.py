@@ -6,8 +6,8 @@ from django.conf.urls import url
 from apps.person import views
 
 urlpatterns = [
-    url('index/',views.information,name='index'),
+    url('index/',views.index,name='index'),
     url('information/',views.information,name='information'),
-    url('address/',views.information,name='address'),
+    url('address/',views.address,name='address'),
 
 ]

@@ -16,5 +16,5 @@ urlpatterns = [
                   url('car/', include('car.urls')),
                   url('order/', include('order.urls')),
                   url('pay/',include('pay.urls')),
-                  url('person/',include('person.urls',namespace='person'))
+                  url('person/',include('person.urls',namespace='person')),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

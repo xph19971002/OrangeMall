@@ -4,10 +4,11 @@ from django.shortcuts import render
 from apps.main.models import User
 
 def index(request):
-    pass
+    return render(request,'person_index.html')
 
 
 def information(request):
+
     if request.method == 'GET':
         uid = request.GET.get('uid')
         user = User.objects.get(id=uid)
@@ -33,6 +34,8 @@ def information(request):
 
 def address(request):
     if request.method == 'GET':
-        return render(request, 'address.html')
+        uid = request.GET.get('uid')
+        user = User.objects.get(id=uid)
+        return render(request, 'address.html',locals())
     elif request.method == 'POST':
         pass

@@ -7,11 +7,8 @@
 {% block page_css %}
     <link href="{% static 'assets/css/amazeui.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'assets/css/personal.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'assets/css/infstyle.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'assets/css/admin.css' %}" rel="stylesheet" type="text/css" />
     <link href="{% static 'assets/css/addstyle.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/base/demo.css' %}" rel="stylesheet" type="text/css" />
-    <link href="{% static 'css/hmstyle.css' %}" rel="stylesheet" type="text/css" />
 {% endblock %}
 {% block page_js %}
 
@@ -25,18 +22,11 @@
         {% include  'common/top.html' %}
         {% include  'common/search/search.html' %}
     </div>
-    <b class="line"></b>
-    <div class="shopNav">
-        <div class="slideall" style="height: auto;">
-            {% include 'include/nav.html' %}
-        </div>
-    </div>
+
+
 {% endblock %}
 
 {% block page_main %}
-    <div class=tip>
-        {% include 'include/sidenav.html' %}
-    </div>
     <div class="center">
 			<div class="col-main">
                 <div class="main-wrap">
@@ -198,11 +188,11 @@
 					<div class="clear"></div>
 
 				</div>
-
+                {% include 'common/footer.html' %}
             </div>
         {% include 'common/person_menu.html' %}
     </div>
-    {% include 'common/footer.html' %}
+
 
 {% endblock %}
 
