@@ -212,11 +212,11 @@
                                     <dl id="select2">
                                         <dt class="am-badge am-round">价格区间</dt>
                                         <div class="dd-conent">
-                                            <dd class="select-all selected"><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=0&sale_num={{ sale_num }}&price_sort={{ price_sort }}">全部</a></dd>
-                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=1&sale_num={{ sale_num }}&price_sort={{ price_sort }}">0~100</a></dd>
-                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=2&sale_num={{ sale_num }}&price_sort={{ price_sort }}">100~200</a></dd>
-                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=3&sale_num={{ sale_num }}&price_sort={{ price_sort }}">200~500</a></dd>
-                                            <dd><a href="{% url 'list:list' %}?page={{  shop_list.number }}&price=4&sale_num={{ sale_num }}&price_sort={{ price_sort }}">500+</a></dd>
+                                            <dd class="select-all selected"><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&price=0&sale_num={{ sale_num }}&price_sort={{ price_sort }}">全部</a></dd>
+                                            <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&price=1&sale_num={{ sale_num }}&price_sort={{ price_sort }}">0~100</a></dd>
+                                            <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&price=2&sale_num={{ sale_num }}&price_sort={{ price_sort }}">100~200</a></dd>
+                                            <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&price=3&sale_num={{ sale_num }}&price_sort={{ price_sort }}">200~500</a></dd>
+                                            <dd><a href="{% url 'list:sort' %}?page={{  shop_list.number }}&price=4&sale_num={{ sale_num }}&price_sort={{ price_sort }}">500+</a></dd>
                                         </div>
                                     </dl>
                                 </li>
