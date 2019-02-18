@@ -36,7 +36,7 @@
                     <div class="new-addr-btn">
                         <a href="javascript:void(0);" class="hidden set_default" aid="{{ defaultaddr.aid }}">设为默认</a>
                         <span class="new-addr-bar hidden">|</span>
-                        <a href="#">编辑</a>
+                        <a href="{% url 'person:address' %}?uid={{ user.id }}">编辑</a>
                         <span class="new-addr-bar">|</span>
                         <a href="javascript:void(0);" onclick="delClick(this);" aid="{{ defaultaddr.aid }}" class="del_addr">删除</a>
                     </div>
@@ -69,7 +69,7 @@
                             <div class="new-addr-btn">
                                 <a href="javascript:void(0);" class="set_default" aid="{{ addr.aid }}">设为默认</a>
                                 <span>|</span>
-                                <a href="#">编辑</a>
+                                <a href="{% url 'person:address' %}?uid={{ user.id }}">编辑</a>
                                 <span class="new-addr-bar">|</span>
                                 <a href="javascript:void(0);" onclick="delClick(this);" aid="{{ addr.aid }}" class="del_addr">删除</a>
                             </div>
