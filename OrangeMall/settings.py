@@ -42,6 +42,7 @@ EXT_APPS = [
     'xadmin',
     'reversion',
     'haystack',
+    'captcha',
 ]
 
 # 自定义功能模块
@@ -61,6 +62,8 @@ INSTALLED_APPS = SYS_APPS + EXT_APPS + CUSTOM_APPS
 
 # 中间件
 MIDDLEWARE = [
+#     缓存中间件
+# 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,7 +71,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+# 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
+CACHE__MIDDLEWARE_SECONDS=15
 
 # 根路由配置文件
 ROOT_URLCONF = 'OrangeMall.urls'
@@ -203,17 +208,19 @@ HAYSTACK_SEARCH_RESULTS_PER_PAGE  = 8
 #             "CONNECTION_POOL_KWARGS": {"max_connections": 100}
 #         }
 #     },
-#     'session': {
-#         'BACKEND': 'django_redis.cache.RedisCache',
-#         # 缓存地址
-#         "LOCATION": "redis://192.168.50.16:6379/3",
-#         "OPTIONS": {
-#             # 'PASSWORD':123
-#             # 使用线程池管理连接
-#             "CONNECTION_POOL_KWARGS": {"max_connections": 100}
-#         }
-#     },
+    # 'session': {
+    #     'BACKEND': 'django_redis.cache.RedisCache',
+    #     # 缓存地址
+    #     "LOCATION": "redis://192.168.50.16:6379/3",
+    #     "OPTIONS": {
+    #         # 'PASSWORD':123
+    #         # 使用线程池管理连接
+    #         "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+    #     }
+    # },
 # }
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+# SESSION_CACHE_ALIAS = "default"
 
 # ----------------------------------------------------------------------
 #                             session配置

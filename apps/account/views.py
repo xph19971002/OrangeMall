@@ -1,10 +1,13 @@
 import re
+
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth import logout, login ,authenticate
 from django.db.models import Q
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+
+from apps.account.form import RegisterForm
 from apps.main.models import User
 from django.contrib.auth.hashers import check_password
 from django.template import loader
@@ -13,32 +16,39 @@ from apps.account.tasks import send_active_mail
 #登录
 def login_view(request):
     if request.method == 'GET':
-        return render(request,'login.html')
+        login_form = RegisterForm()
+        return render(request,'login.html',{'login_form':login_form})
     elif request.method == 'POST':
         try:
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            # 判断密码和账号输入是否为空
-            if username and password:
-                # 认证一组给定的用户和密码,如果密码能够匹配给定的用户名，
-                # 它将返回一个User对象，如果密码无效，authenticate()返回None
-                user = authenticate(username=username,password=password)
-                if user is not None:
-                    #用户名密码正确
-                    if user.is_active:
-                        #用户已激活
-                        #记录用户的登录状态
-                        login(request,user)
-                        #跳转到首页
-                        return redirect('/')
+            login_form = RegisterForm(request.POST)
+            if login_form.is_valid():
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                # 判断密码和账号输入是否为空
+                if username and password:
+                    # 认证一组给定的用户和密码,如果密码能够匹配给定的用户名，
+                    # 它将返回一个User对象，如果密码无效，authenticate()返回None
+                    user = authenticate(username=username,password=password)
+                    # 验证码验证
+
+                    if user is not None:
+                        #用户名密码正确
+                        if user.is_active:
+                            #用户已激活
+                            #记录用户的登录状态
+                            login(request,user)
+                            #跳转到首页
+                            return redirect('/')
+                        else:
+                            #用户未激活
+                            return render(request,'login.html',{'msg':'账户未激活'})
                     else:
-                        #用户未激活
-                        return render(request,'login.html',{'msg':'账户未激活'})
+                        #用户名密码错误
+                        return render(request,'login.html',{'msg':'用户名或密码错误'})
                 else:
-                    #用户名密码错误
-                    return render(request,'login.html',{'msg':'用户名或密码错误'})
+                    return render(request,'login.html',{'msg':'账号或密码不能为空'})
             else:
-                return render(request,'login.html',{'msg':'账号或密码不能为空'})
+                return render(request,'login.html',{'login_form':login_form})
         except Exception as e:
             return render(request,'login.html',{'msg':'登录失败'})
     else:
