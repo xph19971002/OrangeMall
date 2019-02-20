@@ -47,7 +47,6 @@ EXT_APPS = [
 
 # 自定义功能模块
 CUSTOM_APPS = [
-
     'apps.main',
     'apps.account',
     'apps.detail',
@@ -104,13 +103,13 @@ WSGI_APPLICATION = 'OrangeMall.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_shopping',
-        # 'NAME':'omdb',
+        # 'NAME': 'django_shopping',
+        'NAME': 'omdb',
         'POST': '3306',
         'USER': 'root',
         'PASSWORD': 'root',
-        # 'HOST':'192.168.50.16',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.50.16',
+        # 'HOST': '127.0.0.1',
     }
 }
 
@@ -154,10 +153,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'apps/main/static'),
     os.path.join(BASE_DIR, 'apps/detail/static'),
-    os.path.join(BASE_DIR, 'apps/search/static'),
     os.path.join(BASE_DIR, 'apps/account/static'),
     os.path.join(BASE_DIR, 'apps/car/static'),
-    os.path.join(BASE_DIR,'apps/pay/static'),
 )
 
 # 指定自定义用户模型所在的位置
@@ -188,8 +185,8 @@ HAYSTACK_CONNECTIONS = {
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
 
 # 搜索框架
-#设置每页显示的数目，默认为12，可以自己修改
-HAYSTACK_SEARCH_RESULTS_PER_PAGE  = 8
+# 设置每页显示的数目，默认为12，可以自己修改
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 8
 # =================全文检索框架配置 end=============
 
 # ----------------------------------------------------------------------
@@ -288,6 +285,6 @@ PAY_URL_DEV = 'https://openapi.alipaydev.com/gateway.do?'
 # 正式开发环境下支付网关
 PAY_URL = 'https://openapi.alipay.com/gateway.do'
 # 配置私钥
-APP_PRIVATE_KEY_STR = open(os.path.join(BASE_DIR,'app_private_key.pem')).read()
+APP_PRIVATE_KEY_STR = open(os.path.join(BASE_DIR, 'app_private_key.pem')).read()
 # 配置公钥
-APP_PUBLIC_KEY_STR =open(os.path.join(BASE_DIR,'app_public_key.pem')).read()
+APP_PUBLIC_KEY_STR = open(os.path.join(BASE_DIR, 'app_public_key.pem')).read()
